@@ -1,0 +1,341 @@
+﻿powershell -Command "[System.IO.File]::WriteAllText('E:\MAÇONARIA\MASONHUBACADEMY\index.html', @'
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mason Hub Academy</title>
+    
+    <meta property="og:title" content="Mason Hub Academy - Formação e Esclarecimento Maçônico">
+    <meta property="og:description" content="Acesse a Apostila Digital Interativa e conheça a estrutura, legalidade e valores da Ordem.">
+    <meta property="og:image" content="https://masonhubacademy.io/preview.png">
+    <meta property="og:url" content="https://masonhubacademy.io">
+    
+    <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --card-bg: #161616;
+            --accent-gold: #c5a059;
+            --text-light: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --border-color: #2a2a2a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #000;
+            border-bottom: 2px solid var(--accent-gold);
+            padding: 20px 10px;
+            text-align: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .logo-svg {
+            width: 48px;
+            height: 48px;
+            fill: var(--accent-gold);
+        }
+
+        h1 {
+            color: var(--accent-gold);
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #111;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            padding: 14px 20px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .tab-btn:hover {
+            color: var(--accent-gold);
+        }
+
+        .tab-btn.active {
+            color: var(--accent-gold);
+            border-bottom: 3px solid var(--accent-gold);
+            background-color: var(--card-bg);
+        }
+
+        main {
+            flex: 1;
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .tab-content {
+            display: none;
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        h2 {
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: var(--accent-gold);
+            margin: 20px 0 10px 0;
+            font-size: 1.2rem;
+        }
+
+        p {
+            line-height: 1.6;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        ul {
+            margin: 15px 0 20px 20px;
+            color: var(--text-light);
+        }
+
+        li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .alert-box {
+            background-color: #1f1a10;
+            border-left: 4px solid var(--accent-gold);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--accent-gold);
+            color: #000;
+            font-weight: bold;
+            padding: 16px 32px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 20px;
+            text-align: center;
+            transition: background 0.3s ease;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .cta-btn:hover {
+            background-color: #d8b26e;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #000;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+        }
+
+        @media (max-width: 600px) {
+            .tab-btn {
+                flex: 1 1 100%;
+                text-align: center;
+                padding: 12px;
+            }
+            .tab-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <svg class="logo-svg" viewBox="0 0 100 100">
+                <path d="M50 10 L15 85 L25 85 L50 30 L75 85 L85 85 Z" />
+                <path d="M20 50 L80 50 L80 58 L20 58 Z" />
+                <circle cx="50" cy="54" r="6" />
+            </svg>
+            <h1>Mason Hub Academy</h1>
+        </div>
+    </header>
+
+    <nav>
+        <button class="tab-btn active" onclick="openTab(event, 'tab1')">Home & Propósito</button>
+        <button class="tab-btn" onclick="openTab(event, 'tab2')">Graus & Filosofia</button>
+        <button class="tab-btn" onclick="openTab(event, 'tab3')">Estrutura & Família</button>
+        <button class="tab-btn" onclick="openTab(event, 'tab4')">Apostila Digital</button>
+        <button class="tab-btn" onclick="openTab(event, 'tab5')">Escola & Inscrição</button>
+    </nav>
+
+    <main>
+        <!-- ABA 1 -->
+        <section id="tab1" class="tab-content active">
+            <h2>Home & Propósito</h2>
+            <p>Seja bem-vindo à Mason Hub Academy. Nosso propósito é oferecer um canal transparente de instrução e esclarecimento sobre a Ordem Maçônica, desmistificando conceitos e apresentando a verdadeira essência da instituição.</p>
+            
+            <div class="alert-box">
+                <strong>Alerta de Realidade:</strong> A Maçonaria é uma instituição filantrópica, filosófica e progressista. Se o seu objetivo principal é o enriquecimento financeiro rápido ou vantagens comerciais diretas, orientamos tentar a loteria. A Ordem busca lapidar o caráter de pessoas de bem que desejam impactar positivamente a sociedade.
+            </div>
+
+            <p>Embora o convívio fraterno gere naturalmente uma rede de contatos qualificada (networking), o verdadeiro valor da Maçonaria reside no desenvolvimento moral, na fraternidade sincera e no serviço à comunidade.</p>
+        </section>
+
+        <!-- ABA 2 -->
+        <section id="tab2" class="tab-content">
+            <h2>Graus, Ritos e Filosofia</h2>
+            
+            <h3>Os Graus Maçônicos</h3>
+            <ul>
+                <li><strong>Aprendiz:</strong> O primeiro passo. Simboliza a lapidação da pedra bruta, o autoconhecimento, o domínio dos impulsos e o aprendizado do silêncio.</li>
+                <li><strong>Companheiro:</strong> A fase da edificação. Foco no estudo das artes, das ciências, do trabalho e na expansão do intelecto.</li>
+                <li><strong>Mestre:</strong> A plenitude dos direitos e deveres. Representa a maturidade moral, a liderança responsável e a transmissão da tradição.</li>
+            </ul>
+
+            <h3>Tradição e Símbolos</h3>
+            <p>A Ordem fundamenta seus ensinamentos em alegorias e na arquitetura tradicional. A figura de <strong>Hiram Abiff</strong> ressalta a fidelidade aos princípios éticos diante de qualquer adversidade.</p>
+            <p>Reconhecemos Deus sob a designação genérica de <strong>Grande Arquiteto do Universo (G.A.D.U.)</strong>, respeitando integralmente a crença individual de cada membro.</p>
+            <p>A expressão histórica <em>"Ainda há tutano neste osso"</em> ressalta a vitalidade, a força e a permanência inabalável da tradição maçônica ao longo dos séculos.</p>
+        </section>
+
+        <!-- ABA 3 -->
+        <section id="tab3" class="tab-content">
+            <h2>Estrutura Institucional, Legal & Família</h2>
+            
+            <h3>Organização Administrativa</h3>
+            <p>Para uma compreensão clara, a instituição se organiza da seguinte forma:</p>
+            <ul>
+                <li><strong>Loja:</strong> A comunidade de membros que se reúne regularmente.</li>
+                <li><strong>Templo:</strong> O edifício físico onde ocorrem as sessões.</li>
+                <li><strong>Potência:</strong> A instituição central (Grande Loja ou Grande Oriente) que administra jurisdições de Lojas.</li>
+            </ul>
+
+            <h3>Transparência Financeira & Rigor Legal</h3>
+            <p>Nos termos do Código Civil Brasileiro (Arts. 53 a 61) e da Constituição Federal de 1988, as Lojas Maçônicas operam estritamente como <strong>Associações Privadas Sem Fins Lucrativos</strong>.</p>
+            <ul>
+                <li><strong>Mensalidade:</strong> Contribuição regular para manutenção das instalações do Templo e obras sociais.</li>
+                <li><strong>Joia de Ingresso:</strong> Taxa associativa cobrada na admissão para custear a confecção de credenciais, rituais e registros administrativos. Os valores são definidos individualmente pelo estatuto de cada Loja.</li>
+            </ul>
+
+            <h3>Família & Rede Fraterna Global</h3>
+            <p>A família é a base da vida maçônica. Esposas (cunhadas), maridos e filhos (Lowtons) participam ativamente da vida social e de ordens juvenis vinculadas (como Ordem DeMolay e Filhas de Jó).</p>
+            <p>O maçom e sua família contam com o amparo de uma Fraternidade Universal presente em todo o mundo. O uso de sinais, toques e palavras restringe-se ao reconhecimento mútuo e ao apoio legítimo em momentos de necessidade real.</p>
+        </section>
+
+        <!-- ABA 4 -->
+        <section id="tab4" class="tab-content">
+            <h2>Apostila Digital Interativa</h2>
+            <p><em>Maçonaria: O que é, porque é, para quem é?</em></p>
+            <hr style="border-color: var(--border-color); margin: 15px 0;">
+
+            <h3>Capítulo 1: O que é a Maçonaria?</h3>
+            <p>A Maçonaria é uma ordem universal, filosófica, filantrópica e progressista. Não é uma religião nem uma seita. Reúne indivíduos dispostos a trabalhar pelo aperfeiçoamento da humanidade sob os valores de Liberdade, Igualdade e Fraternidade.</p>
+
+            <h3>Capítulo 2: Sociedade Secreta ou Discreta?</h3>
+            <p>A Maçonaria é uma sociedade discreta. Suas sedes têm endereço público e obedecem às leis do país. O sigilo refere-se apenas aos seus modos tradicionais de reconhecimento interno e rituais.</p>
+
+            <h3>Capítulo 3: Os Graus do Simbolismo</h3>
+            <p>Dividido em Aprendiz (trabalho interno e autoconhecimento), Companheiro (estudo das ciências e trabalho social) e Mestre (maturidade e transmissão do conhecimento).</p>
+
+            <h3>Capítulo 4: Para Quem É (e Para Quem Não É)</h3>
+            <p>É voltada para quem busca aperfeiçoamento ético, pratica a solidariedade e valoriza a família. Não é para quem busca ganhos financeiros fáceis ou privilégios indevidos.</p>
+
+            <h3>Capítulo 5: Processo de Admissão</h3>
+            <p>O ingresso ocorre por convite e aprovação em rigorosa sindicância. O candidato pode ser reprovado caso não atenda aos critérios morais da instituição.</p>
+
+            <button class="cta-btn" onclick="openTab(event, 'tab5')">Avançar para Inscrição na Escola</button>
+        </section>
+
+        <!-- ABA 5 -->
+        <section id="tab5" class="tab-content">
+            <h2>Escola Maçônica & Inscrição</h2>
+            <p>A Escola Maçônica Mason Hub prepara candidatos interessados através do fornecimento de materiais instrutivos transparentes e acompanhamento orientador.</p>
+            
+            <p>Para prosseguir com sua inscrição, ter acesso aos cursos de formação preparatória e registrar seu interesse para direcionamento à Loja Maçônica da sua região, acesse nosso ambiente de alunos abaixo:</p>
+
+            <div class="alert-box" style="text-align: center; margin: 25px 0;">
+                <p style="margin-bottom: 0;"><strong>Ambiente Seguro Kiwify:</strong> Você será redirecionado para a plataforma oficial de cursos e treinamentos da Mason Hub Academy.</p>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="https://dashboard.kiwify.com.br/courses" target="_blank" class="cta-btn">Acessar Portal de Cursos Kiwify</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Mason Hub Academy — Todos os direitos reservados. Em conformidade com a Legislação Brasileira.</p>
+    </footer>
+
+    <script>
+        function openTab(evt, tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            
+            if (evt) {
+                evt.currentTarget.classList.add('active');
+            } else {
+                const targetBtn = Array.from(buttons).find(btn => btn.getAttribute('onclick').includes(tabId));
+                if (targetBtn) targetBtn.classList.add('active');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
+'@, [System.Text.Encoding]::UTF8)"
