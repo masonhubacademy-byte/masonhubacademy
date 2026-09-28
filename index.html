@@ -16,20 +16,12 @@
   html, body { margin: 0; padding: 0; background: #05070e; -webkit-text-size-adjust: 100%; }
   body { padding: clamp(4px, 1.2vw, 12px); font-size: 16px; overflow-x: hidden; }
 
-  /* =========================================================
-     FUNDO COM SÍMBOLOS MAÇÔNICOS (marca d'água)
-     ========================================================= */
   #mha-bg {
     position: fixed; inset: 0; z-index: 0; pointer-events: none;
-    background:
-      radial-gradient(120% 90% at 50% -10%, #16203a 0%, #0b1120 42%, #05070e 100%);
+    background: radial-gradient(120% 90% at 50% -10%, #16203a 0%, #0b1120 42%, #05070e 100%);
     overflow: hidden;
   }
-  #mha-bg svg {
-    position: absolute; color: #c9a227;
-    opacity: 0.055;
-    filter: drop-shadow(0 0 40px rgba(201,162,39,.15));
-  }
+  #mha-bg svg { position: absolute; color: #c9a227; filter: drop-shadow(0 0 40px rgba(201,162,39,.15)); }
   #mha-bg .mha-sym-compass { top: 2%; left: 50%; transform: translateX(-50%); width: clamp(260px, 45vw, 520px); height: auto; opacity: 0.07; }
   #mha-bg .mha-sym-eye { top: 12%; left: 3%; width: clamp(90px, 14vw, 160px); height: auto; opacity: 0.06; }
   #mha-bg .mha-sym-g { bottom: 6%; right: 4%; width: clamp(80px, 12vw, 140px); height: auto; opacity: 0.08; }
@@ -88,38 +80,23 @@
   .mha-menu-panel::-webkit-scrollbar { width: 6px; }
   .mha-menu-panel::-webkit-scrollbar-thumb { background: rgba(201,162,39,.3); border-radius: 8px; }
 
-  .mha-menu-head {
-    padding: 0 22px 18px;
-    border-bottom: 1px solid rgba(201,162,39,.18);
-    text-align: left;
-  }
-  .mha-menu-head h2 {
-    margin: 0; font-family: Georgia, serif; font-weight: 400;
+  .mha-menu-head { padding: 0 22px 18px; border-bottom: 1px solid rgba(201,162,39,.18); }
+  .mha-menu-head h2 { margin: 0; font-family: Georgia, serif; font-weight: 400;
     font-size: 1.15rem; color: #f7f2e4; letter-spacing: .01em;
-    text-shadow: 0 0 24px rgba(201,162,39,.3);
-  }
-  .mha-menu-head p {
-    margin: 4px 0 0; font-size: .62rem; letter-spacing: .22em;
-    text-transform: uppercase; color: #b9a980;
-  }
+    text-shadow: 0 0 24px rgba(201,162,39,.3); }
+  .mha-menu-head p { margin: 4px 0 0; font-size: .62rem; letter-spacing: .22em;
+    text-transform: uppercase; color: #b9a980; }
 
-  .mha-menu-nav {
-    display: flex; flex-direction: column;
-    padding: 14px 0; margin: 0;
-  }
+  .mha-menu-nav { display: flex; flex-direction: column; padding: 14px 0; margin: 0; }
   .mha-menu-nav a {
     display: flex; align-items: center; gap: 12px;
-    padding: 13px 22px;
-    color: #dde3f0; text-decoration: none;
+    padding: 13px 22px; color: #dde3f0; text-decoration: none;
     font-size: .95rem; font-weight: 500;
     border-left: 3px solid transparent;
     transition: background .18s, border-color .18s, color .18s;
     -webkit-tap-highlight-color: transparent;
   }
-  .mha-menu-nav a::before {
-    content: "✦"; color: rgba(232,210,154,.55);
-    font-size: .82rem; flex: 0 0 auto;
-  }
+  .mha-menu-nav a::before { content: "✦"; color: rgba(232,210,154,.55); font-size: .82rem; flex: 0 0 auto; }
   .mha-menu-nav a:hover,
   .mha-menu-nav a:focus-visible {
     background: rgba(201,162,39,.08);
@@ -131,14 +108,11 @@
     border-left-color: #e8d29a;
     color: #f5ecd6; font-weight: 600;
   }
-
-  .mha-menu-foot {
-    margin-top: auto; padding: 18px 22px 0;
+  .mha-menu-foot { margin-top: auto; padding: 18px 22px 0;
     border-top: 1px solid rgba(201,162,39,.15);
     font-size: .62rem; letter-spacing: .14em;
     text-transform: uppercase; color: rgba(154,166,191,.62);
-    text-align: center;
-  }
+    text-align: center; }
 
   @media (max-width: 400px) {
     .mha-menu-btn { top: 10px; right: 10px; width: 42px; height: 42px; }
@@ -305,9 +279,123 @@
   }
   .mha-lgpd a { color: var(--mha-gold-soft); text-decoration: underline; text-underline-offset: 2px; }
 
+  /* =========================================================
+     LOADER — ESQUADRO E COMPASSO SE DESENHANDO
+     ========================================================= */
+  .mha-loader {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: clamp(28px, 6vw, 56px) 12px;
+    gap: 18px;
+    animation: mhaIn .3s ease both;
+  }
+  .mha-loader svg {
+    width: clamp(96px, 22vw, 130px); height: auto;
+    overflow: visible;
+  }
+  .mha-loader .mha-loader-square {
+    stroke: #e8d29a;
+    stroke-width: 3.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    filter: drop-shadow(0 0 8px rgba(232,210,154,.55)) drop-shadow(0 0 20px rgba(201,162,39,.35));
+    stroke-dasharray: 240;
+    stroke-dashoffset: 240;
+    animation: mhaDrawSquare 3s cubic-bezier(.5,0,.3,1) infinite;
+  }
+  .mha-loader .mha-loader-compass {
+    stroke: #e8d29a;
+    stroke-width: 3.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    filter: drop-shadow(0 0 8px rgba(232,210,154,.55)) drop-shadow(0 0 20px rgba(201,162,39,.35));
+    stroke-dasharray: 240;
+    stroke-dashoffset: 240;
+    animation: mhaDrawCompass 3s cubic-bezier(.5,0,.3,1) infinite;
+  }
+  .mha-loader .mha-loader-dot {
+    fill: #e8d29a;
+    filter: drop-shadow(0 0 6px rgba(232,210,154,.9)) drop-shadow(0 0 14px rgba(201,162,39,.6));
+    opacity: 0;
+    animation: mhaDotPulse 3s ease-in-out infinite;
+    transform-origin: center;
+  }
+  @keyframes mhaDrawSquare {
+    0%   { stroke-dashoffset: 240; }
+    40%  { stroke-dashoffset: 0; }
+    90%  { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: -240; }
+  }
+  @keyframes mhaDrawCompass {
+    0%   { stroke-dashoffset: 240; }
+    15%  { stroke-dashoffset: 240; }
+    55%  { stroke-dashoffset: 0; }
+    90%  { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: -240; }
+  }
+  @keyframes mhaDotPulse {
+    0%, 50%   { opacity: 0; transform: scale(.6); }
+    60%       { opacity: 1; transform: scale(1); }
+    85%       { opacity: 1; transform: scale(1); }
+    95%,100%  { opacity: 0; transform: scale(.6); }
+  }
+  .mha-loader-text {
+    margin: 0; text-align: center;
+    font-family: Georgia, serif; font-weight: 400;
+    font-size: clamp(.82rem, 2.4vw, .98rem);
+    letter-spacing: .22em; text-transform: uppercase;
+    color: #b9a980;
+    opacity: .85;
+    animation: mhaLoaderText 3s ease-in-out infinite;
+  }
+  @keyframes mhaLoaderText {
+    0%, 100% { opacity: .5; }
+    50%      { opacity: 1; }
+  }
+  .mha-loader-sub {
+    margin: 0; text-align: center;
+    font-size: clamp(.68rem, 2vw, .78rem);
+    letter-spacing: .12em;
+    color: rgba(154,166,191,.55);
+    font-style: italic;
+    max-width: 320px; line-height: 1.6;
+  }
+
+  /* =========================================================
+     ERRO COM BOTÃO RETRY
+     ========================================================= */
+  .mha-retry-wrap {
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    padding: clamp(14px, 3vw, 22px) 0 clamp(4px, 1vw, 10px);
+  }
+  .mha-retry-btn {
+    min-width: 200px; padding: 12px 22px; border-radius: 11px;
+    border: 1px solid rgba(201,162,39,.55);
+    background: linear-gradient(180deg, rgba(201,162,39,.20), rgba(201,162,39,.06));
+    color: #f5ecd6; font: inherit; font-size: clamp(.82rem, 2.5vw, .94rem);
+    font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+    cursor: pointer; -webkit-tap-highlight-color: transparent;
+    transition: transform .12s ease, background .18s ease, border-color .18s ease;
+  }
+  .mha-retry-btn:hover {
+    background: linear-gradient(180deg, rgba(201,162,39,.32), rgba(201,162,39,.12));
+    border-color: rgba(232,210,154,.8);
+  }
+  .mha-retry-btn:active { transform: scale(.98); }
+  .mha-retry-btn:focus-visible { outline: 2px solid var(--mha-gold-soft); outline-offset: 3px; }
+
   @media (prefers-reduced-motion: reduce) {
     .mha-msg, #mha-guardian .mha-thinking::before,
-    .mha-menu-panel, .mha-menu-overlay, .mha-menu-btn span { animation: none; transition: none; }
+    .mha-menu-panel, .mha-menu-overlay, .mha-menu-btn span,
+    .mha-loader .mha-loader-square, .mha-loader .mha-loader-compass,
+    .mha-loader .mha-loader-dot, .mha-loader-text {
+      animation: none;
+    }
+    .mha-loader .mha-loader-square,
+    .mha-loader .mha-loader-compass { stroke-dashoffset: 0; }
+    .mha-loader .mha-loader-dot { opacity: 1; transform: scale(1); }
+    .mha-loader-text { opacity: 1; }
   }
   @media (max-width: 460px) { .mha-opts .mha-btn { flex: 1 1 100%; } }
   @media (max-width: 400px) {
@@ -324,9 +412,6 @@
 </head>
 <body>
 
-<!-- =========================================================
-     FUNDO COM SÍMBOLOS MAÇÔNICOS (marca d'água)
-     ========================================================= -->
 <div id="mha-bg" aria-hidden="true">
 
   <svg class="mha-sym-compass" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -372,9 +457,6 @@
 
 </div>
 
-<!-- =========================================================
-     MENU SANDUÍCHE
-     ========================================================= -->
 <button id="mha-menu-btn" class="mha-menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mha-menu-panel">
   <span></span><span></span><span></span>
 </button>
@@ -401,9 +483,6 @@
   </div>
 </aside>
 
-<!-- =========================================================
-     GUARDIÃO
-     ========================================================= -->
 <div id="mha-guardian">
   <div class="mha-inner">
     <header class="mha-head">
@@ -412,6 +491,23 @@
       <div class="mha-badge">Guardião da Porta do Templo</div>
       <div class="mha-light" aria-hidden="true"></div>
     </header>
+
+    <!-- LOADER inicial (mostrado enquanto o cérebro carrega) -->
+    <div id="mha-loader" class="mha-loader" role="status" aria-live="polite">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <!-- Esquadro -->
+        <path class="mha-loader-square"
+              d="M 20 78 L 80 78 M 20 78 L 20 18" />
+        <!-- Compasso -->
+        <path class="mha-loader-compass"
+              d="M 50 12 L 20 72 M 50 12 L 80 72 M 50 12 L 50 22" />
+        <!-- Ponto central -->
+        <circle class="mha-loader-dot" cx="50" cy="50" r="3.5"/>
+      </svg>
+      <p class="mha-loader-text">Preparando o Templo...</p>
+      <p class="mha-loader-sub">O Guardião está sendo chamado à porta.</p>
+    </div>
+
     <div id="mha-log" class="mha-log" role="log" aria-live="polite"></div>
     <div id="mha-thinking" class="mha-thinking" aria-hidden="true"></div>
     <div id="mha-controls" class="mha-controls"></div>
@@ -464,10 +560,7 @@
 
   /* =========================================================
      COMUNICAÇÃO — via rotas serverless da Vercel (/api/brain, /api/chat)
-     O site nunca conversa com o Google diretamente. Isso elimina
-     problemas de CORS, cache, DNS e bloqueadores de celular.
      ========================================================= */
-
   var REQUEST_TIMEOUT_MS = 45000;
 
   function withTimeout(promise, ms) {
@@ -509,6 +602,7 @@
   var logEl = document.getElementById('mha-log');
   var controlsEl = document.getElementById('mha-controls');
   var thinkingEl = document.getElementById('mha-thinking');
+  var loaderEl = document.getElementById('mha-loader');
 
   /* =========================================================
      UTILS
@@ -573,6 +667,16 @@
   function disableAll(d) {
     controlsEl.querySelectorAll('button, input, textarea').forEach(function (el) { el.disabled = !!d; });
   }
+  function hideLoader() {
+    if (loaderEl && loaderEl.parentNode) {
+      loaderEl.parentNode.removeChild(loaderEl);
+      loaderEl = null;
+    }
+  }
+  function showLoader() {
+    if (!loaderEl) return;
+    loaderEl.style.display = '';
+  }
 
   /* =========================================================
      RENDER
@@ -610,6 +714,29 @@
     btn.type = 'button'; btn.className = 'mha-btn mha-btn--ghost'; btn.textContent = 'REINICIAR';
     btn.addEventListener('click', restart);
     row.appendChild(btn); controlsEl.appendChild(row);
+  }
+
+  /**
+   * Mostra o aviso de erro com botão "TENTAR NOVAMENTE".
+   * Retry é diferente de reiniciar: tenta carregar o cérebro de novo.
+   */
+  function showLoadError() {
+    clearControls();
+    guardianSay('O Guardião está demorando mais que o esperado para atender. Pode ser instabilidade momentânea ou conexão lenta.\n\nToque no botão abaixo para tentar novamente.');
+
+    var wrap = document.createElement('div');
+    wrap.className = 'mha-retry-wrap';
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'mha-retry-btn';
+    btn.textContent = '↻ Tentar novamente';
+    btn.addEventListener('click', function () {
+      clearControls();
+      logEl.innerHTML = '';
+      loadBrain();
+    });
+    wrap.appendChild(btn);
+    controlsEl.appendChild(wrap);
   }
 
   /* =========================================================
@@ -776,6 +903,7 @@
   }
 
   function renderStage(data) {
+    hideLoader();
     var fin = Boolean(data && (data.finalizado || data.finished || data.encerrado));
     var p = extractPath(data);
     if (p) state.path = p;
@@ -807,32 +935,55 @@
     setTimeout(loadBrain, 100);
   }
 
+  /**
+   * Carrega o cérebro com retry automático.
+   * - Tenta até 3 vezes
+   * - Backoff curto entre tentativas (600ms, 1200ms)
+   * - Se todas falharem, mostra o erro com botão "Tentar novamente"
+   */
   function loadBrain() {
-    clearControls(); setThinking(false);
-    apiBrain().then(function (data) {
-      try {
-        normalizeBrain(data);
-        state.step = 'SELECAO_ROTA';
-        guardianSay('Bem-vindo.\nVocê é?', { question: true });
-        var row = document.createElement('div');
-        row.className = 'mha-opts';
-        [{ v: 'CANDIDATO', l: 'CANDIDATO' }, { v: 'LOJA_OFICINA', l: 'LOJA / OFICINA' }].forEach(function (o) {
-          var b = document.createElement('button');
-          b.type = 'button'; b.className = 'mha-btn'; b.textContent = o.l;
-          b.addEventListener('click', function () { state.path = o.v; send(o.v); });
-          row.appendChild(b);
-        });
-        controlsEl.appendChild(row);
-      } catch (e) {
-        console.error(e);
-        guardianSay('Erro ao carregar a base.');
-        restartBtn();
-      }
-    }).catch(function (err) {
-      console.error(err);
-      guardianSay('Não foi possível carregar a base do Guardião.');
-      restartBtn();
-    });
+    showLoader();
+    clearControls();
+    setThinking(false);
+
+    var attempt = 0;
+    var maxAttempts = 3;
+
+    function tryOnce() {
+      attempt++;
+      apiBrain().then(function (data) {
+        try {
+          hideLoader();
+          normalizeBrain(data);
+          state.step = 'SELECAO_ROTA';
+          guardianSay('Bem-vindo.\nVocê é?', { question: true });
+          var row = document.createElement('div');
+          row.className = 'mha-opts';
+          [{ v: 'CANDIDATO', l: 'CANDIDATO' }, { v: 'LOJA_OFICINA', l: 'LOJA / OFICINA' }].forEach(function (o) {
+            var b = document.createElement('button');
+            b.type = 'button'; b.className = 'mha-btn'; b.textContent = o.l;
+            b.addEventListener('click', function () { state.path = o.v; send(o.v); });
+            row.appendChild(b);
+          });
+          controlsEl.appendChild(row);
+        } catch (e) {
+          console.error(e);
+          hideLoader();
+          guardianSay('Erro ao carregar a base.');
+          restartBtn();
+        }
+      }).catch(function (err) {
+        console.warn('[MHA] tentativa ' + attempt + ' falhou:', err);
+        if (attempt < maxAttempts) {
+          setTimeout(tryOnce, 600 * attempt);
+          return;
+        }
+        hideLoader();
+        showLoadError();
+      });
+    }
+
+    tryOnce();
   }
 
   window.addEventListener('load', loadBrain);
