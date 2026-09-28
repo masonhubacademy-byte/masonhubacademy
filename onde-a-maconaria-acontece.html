@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="color-scheme" content="dark">
+<title>Onde a Maçonaria Acontece — MasonHubAcademy</title>
+<meta name="description" content="A Loja como unidade local da Maçonaria: o que é, como funciona, sua relação com o Templo e a estrutura superior.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='78' font-size='90'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
+<style>
+  html, body { margin: 0; padding: 0; background: #05070e; -webkit-text-size-adjust: 100%; }
+  body { padding: clamp(4px, 1.2vw, 12px); font-size: 16px; overflow-x: hidden; }
+  #mha-bg {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background: radial-gradient(120% 90% at 50% -10%, #16203a 0%, #0b1120 42%, #05070e 100%);
+    overflow: hidden;
+  }
+  #mha-bg svg { position: absolute; color: #c9a227; filter: drop-shadow(0 0 40px rgba(201,162,39,.15)); }
+  #mha-bg .sym-compass { top: 2%; left: 50%; transform: translateX(-50%); width: clamp(260px, 45vw, 520px); height: auto; opacity: 0.05; }
+  #mha-bg .sym-ashlar { bottom: 8%; left: 4%; width: clamp(90px, 13vw, 150px); height: auto; opacity: 0.04; }
+  #mha-bg .sym-eye { top: 12%; right: 3%; width: clamp(90px, 14vw, 160px); height: auto; opacity: 0.05; }
+  #mha-page {
+    position: relative; z-index: 1; width: 100%; max-width: 880px; margin: 0 auto;
+    padding: clamp(14px, 3vw, 32px); border-radius: clamp(10px, 2.4vw, 18px);
+    border: 1px solid rgba(201, 162, 39, .2);
+    background: linear-gradient(180deg, rgba(11,17,32,.85), rgba(5,7,14,.92));
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    color: #e9edf7;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.65; box-shadow: 0 24px 70px rgba(0,0,0,.55);
+    -webkit-font-smoothing: antialiased;
+  }
+  #mha-page * { box-sizing: border-box; }
+  .mha-head { text-align: center; }
+  .mha-brand { margin: 0; font-family: Georgia, serif; font-weight: 400;
+    font-size: clamp(1.05rem, 5vw, 1.9rem); letter-spacing: .015em;
+    color: #f7f2e4; text-shadow: 0 0 34px rgba(201,162,39,.28); }
+  .mha-sub { margin: 4px 0 0; font-size: clamp(.58rem, 2vw, .74rem);
+    letter-spacing: .24em; text-transform: uppercase; color: #b9a980; }
+  .mha-badge { display: inline-block; margin: clamp(8px,2vw,14px) auto 0; padding: 5px 12px;
+    border: 1px solid rgba(201,162,39,.42); border-radius: 999px;
+    font-size: clamp(.55rem,1.9vw,.7rem); letter-spacing: .18em; text-transform: uppercase;
+    color: #e8d29a; background: linear-gradient(180deg, rgba(201,162,39,.16), rgba(201,162,39,.03)); }
+  .mha-nav { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+    margin: clamp(14px,3vw,22px) 0; padding-bottom: clamp(10px,2vw,16px);
+    border-bottom: 1px solid rgba(201,162,39,.16); }
+  .mha-nav a { display: inline-block; padding: 6px 11px; border-radius: 8px;
+    border: 1px solid rgba(201,162,39,.28); background: rgba(201,162,39,.05);
+    color: #e8d29a; text-decoration: none;
+    font-size: clamp(.66rem,1.9vw,.76rem); letter-spacing: .05em;
+    text-transform: uppercase; transition: background .15s, border-color .15s; }
+  .mha-nav a:hover { background: rgba(201,162,39,.14); border-color: rgba(232,210,154,.6); color: #fff; }
+  .mha-nav a.is-active { background: rgba(201,162,39,.18); border-color: rgba(232,210,154,.7); color: #fff; }
+  .mha-content { font-size: clamp(.92rem, 2.7vw, 1rem); }
+  .mha-content > p:first-of-type { font-size: clamp(1rem, 3vw, 1.08rem); color: #e9edf7; }
+  .mha-content h2 { font-family: Georgia, serif; font-weight: 400;
+    font-size: clamp(1.05rem, 3.4vw, 1.35rem); line-height: 1.3;
+    color: #e8d29a; margin: clamp(22px,3.6vw,30px) 0 clamp(8px,1.6vw,12px);
+    padding-top: clamp(12px,2vw,18px);
+    border-top: 1px solid rgba(201,162,39,.14);
+    letter-spacing: .01em; }
+  .mha-content h2:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+  .mha-content p { margin: 0 0 clamp(10px,2vw,14px); color: #dde3f0; }
+  .mha-content strong { color: #f5ecd6; font-weight: 600; }
+  .mha-content em { color: #e8d29a; font-style: italic; }
+  .mha-content ul { margin: 0 0 clamp(10px,2vw,14px); padding-left: 22px; color: #dde3f0; }
+  .mha-content li { margin-bottom: 5px; }
+  .mha-content a { color: #e8d29a; text-decoration: underline; text-underline-offset: 2px; word-break: break-word; }
+  .mha-content a:hover { color: #fff; }
+  .mha-content blockquote { margin: clamp(12px,2vw,18px) 0; padding: 12px 16px;
+    border-left: 2px solid rgba(201,162,39,.5); background: rgba(201,162,39,.045);
+    color: #e8d29a; font-style: italic; border-radius: 0 8px 8px 0; }
+  .mha-sources { font-size: clamp(.78rem, 2.3vw, .88rem); color: #b6bed0; }
+  .mha-sources li { margin-bottom: 4px; }
+  .mha-back { display: inline-flex; align-items: center; gap: 6px;
+    margin-top: clamp(20px,3vw,28px); padding: 11px 18px; border-radius: 10px;
+    border: 1px solid rgba(201,162,39,.4);
+    background: linear-gradient(180deg, rgba(201,162,39,.14), rgba(201,162,39,.04));
+    color: #f2e6c6; text-decoration: none;
+    font-size: clamp(.78rem,2.4vw,.88rem); font-weight: 600;
+    letter-spacing: .05em; text-transform: uppercase;
+    -webkit-tap-highlight-color: transparent; }
+  .mha-back:hover { background: linear-gradient(180deg, rgba(201,162,39,.26), rgba(201,162,39,.10));
+    border-color: rgba(232,210,154,.7); color: #fff; }
+  .mha-foot { margin-top: clamp(20px,4vw,32px); padding-top: clamp(12px,2vw,18px);
+    border-top: 1px solid rgba(201,162,39,.14); text-align: center;
+    font-size: clamp(.58rem,1.8vw,.66rem); letter-spacing: .12em;
+    text-transform: uppercase; color: rgba(154,166,191,.68); }
+  @media (max-width: 400px) {
+    .mha-brand { font-size: clamp(.92rem, 5vw, 1.4rem); }
+    .mha-sub { font-size: .56rem; letter-spacing: .18em; }
+    .mha-badge { font-size: .52rem; padding: 4px 10px; letter-spacing: .14em; }
+    .mha-nav a { padding: 5px 9px; font-size: .62rem; }
+  }
+</style>
+</head>
+<body>
+
+<div id="mha-bg" aria-hidden="true">
+  <svg class="sym-compass" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="100" cy="30" r="7"/>
+    <path d="M100 37 L40 170"/>
+    <path d="M100 37 L160 170"/>
+    <path d="M40 170 L100 130 L160 170"/>
+  </svg>
+  <svg class="sym-ashlar" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round">
+    <path d="M30 70 L100 30 L170 70 L170 150 L100 190 L30 150 Z"/>
+    <path d="M30 70 L100 110 L170 70"/>
+    <path d="M100 110 L100 190"/>
+    <path d="M50 85 L75 72" stroke-dasharray="3 4"/>
+    <path d="M55 100 L90 82" stroke-dasharray="3 4"/>
+  </svg>
+  <svg class="sym-eye" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round">
+    <path d="M100 15 L185 175 L15 175 Z"/>
+    <ellipse cx="100" cy="135" rx="42" ry="22"/>
+    <circle cx="100" cy="135" r="12"/>
+  </svg>
+</div>
+
+<article id="mha-page">
+  <header class="mha-head">
+    <h1 class="mha-brand">MasonHubAcademy</h1>
+    <p class="mha-sub">Templo · Geometria · Luz</p>
+    <div class="mha-badge">Conhecimento antes da Porta</div>
+  </header>
+
+  <nav class="mha-nav">
+    <a href="/">Início</a>
+    <a href="/o-que-e-maconaria.html">O que é Maçonaria</a>
+    <a href="/historia-da-maconaria.html">História</a>
+    <a href="/ritos-e-tradicoes.html">Ritos</a>
+    <a href="/mitos-e-verdades.html">Mitos e Verdades</a>
+    <a href="/onde-a-maconaria-acontece.html" class="is-active">Onde Acontece</a>
+    <a href="/politica-de-privacidade.html">Política</a>
+    <a href="/termos-de-uso.html">Termos</a>
+  </nav>
+
+  <main class="mha-content">
+
+    <p>Há portas que não se abrem com uma chave. Abrem-se com uma pergunta. E há lugares que não são apenas endereços, mas comunidades que respiram, trabalham, estudam e se lembram. A Maçonaria, quando deixa de ser uma ideia no papel e se torna experiência vivida, acontece em um espaço concreto: <strong>a Loja</strong>. É ali que a tradição se torna presença, que o simbolismo se torna linguagem e que a fraternidade se torna convivência. Este texto é sobre esse lugar. Sobre o que ele é, como funciona e por que não se confunde com um simples prédio ou uma placa na fachada.</p>
+
+    <h2>O que é uma Loja</h2>
+
+    <p>Para quem nunca teve contato com a Maçonaria, a resposta mais direta é também a mais honesta: uma <strong>Loja</strong> é a unidade local da organização maçônica, o espaço institucional onde seus membros se reúnem regularmente para desenvolver seus trabalhos. É o equivalente, guardadas as proporções e as devidas diferenças, da paróquia para uma comunidade religiosa ou do clube para uma associação civil. É o ponto de encontro, o centro de gravidade da vida maçônica.</p>
+
+    <p>A Loja é, portanto, uma <strong>comunidade de pessoas</strong>. Não é um cargo, não é um título, não é uma hierarquia abstrata. É um grupo de indivíduos que compartilham valores, que se reúnem periodicamente, que administram juntos a vida da organização e que constroem, no tempo, uma história comum. A Loja pode ter sede própria, pode reunir-se em espaço compartilhado, pode ser pequena ou numerosa. O que a define não é a parede, mas a comunidade que a habita.</p>
+
+    <p>Essa definição, no entanto, precisa de um cuidado. Diferentes jurisdições e tradições maçônicas organizam suas Lojas de maneiras distintas. Aquilo que é regra em uma Potência pode não ser em outra. A estrutura administrativa, os critérios de funcionamento, o calendário de reuniões e até mesmo a nomenclatura dos cargos variam conforme a organização. Não existe uma definição única e universal de Loja que sirva para toda a Maçonaria mundial. Existe, isso sim, um traço comum: a Loja é o lugar onde a Maçonaria acontece de fato.</p>
+
+    <h2>Loja e Oficina</h2>
+
+    <p>Ao longo da história, a Maçonaria desenvolveu uma linguagem própria. E nessa linguagem, dois termos convivem com frequência: <strong>Loja</strong> e <strong>Oficina</strong>.</p>
+
+    <p>Em muitos contextos maçônicos, <em>Oficina</em> é empregado como sinônimo de Loja, ou como designação do corpo local de trabalho maçônico. A origem do termo remete à ideia de oficina como lugar de trabalho, de elaboração, de construção. Os maçons franceses, por exemplo, chamavam a Loja de <em>atelier</em>, palavra que significa precisamente oficina, um lugar onde artesãos trabalham sob a direção de um mestre. A metáfora é antiga e coerente com a própria história da Maçonaria, que nasceu da linguagem dos construtores medievais.</p>
+
+    <p>Mas é preciso evitar uma armadilha comum: a de inventar uma diferença absoluta entre Loja e Oficina onde ela não existe de forma universal. Em algumas jurisdições, os termos são usados como sinônimos. Em outras, Oficina pode designar a Loja ou o conjunto de corpos maçônicos locais. A nomenclatura varia. O que importa compreender é que, na prática, ambos os termos apontam para a mesma realidade fundamental: a unidade local onde os trabalhos maçônicos são realizados.</p>
+
+    <p>Não se deve, portanto, criar uma regra universal que não existe. A honestidade intelectual exige reconhecer a diversidade. O que se pode afirmar com segurança é que Loja e Oficina, em muitos contextos, referem-se à mesma coisa: o lugar onde a Maçonaria se reúne, trabalha e se organiza.</p>
+
+    <h2>A Loja como comunidade</h2>
+
+    <p>Uma Loja não deve ser vista apenas como uma construção física. Ela é formada por pessoas. Existe convivência. Existe responsabilidade. Existe organização. Existe aprendizado. Existe transmissão de tradição. Existe trabalho coletivo.</p>
+
+    <p>A imagem é simples e verdadeira: o Templo pode ser de pedra, mas a Loja é construída também pelas relações entre seus membros. Cada reunião, cada estudo, cada cerimônia, cada gesto de auxílio e cada conversa contribuem para essa construção invisível. A Loja é feita daquilo que acontece entre as pessoas, daquilo que se constrói no tempo, daquilo que se transmite de geração em geração.</p>
+
+    <p>É por isso que uma Loja pode ser pequena e ser grande. Pode ter poucos membros e ser rica em convivência. Pode ter muitos membros e ser fria e impessoal. A qualidade de uma Loja não se mede pelo número, mas pela densidade das relações que ali se estabelecem. A fraternidade, quando é real, não depende de quantidade.</p>
+
+    <h2>Desenvolvimento dos trabalhos</h2>
+
+    <p>O que acontece dentro de uma Loja? A pergunta é legítima e a resposta, em termos gerais, é acessível.</p>
+
+    <p>Uma Loja pode desenvolver atividades relacionadas a reuniões administrativas, estudo, formação, reflexão, administração, cerimônias, convivência, filantropia, atividades sociais, planejamento e organização interna. As práticas variam conforme a organização e a jurisdição. Não se pode afirmar que toda Loja realiza exatamente as mesmas atividades, da mesma forma e com a mesma frequência.</p>
+
+    <p>De modo geral, as reuniões de uma Loja costumam combinar dois tipos de trabalho: uma parte <strong>administrativa</strong>, na qual se discutem assuntos internos, propostas de novos membros, finanças e atas de reuniões anteriores, e uma parte <strong>cerimonial</strong>, na qual podem ocorrer rituais de ingresso, progressão ou outras atividades simbólicas previstas pela tradição.</p>
+
+    <p>É importante compreender que esta página não revela procedimentos internos reservados. O que se descreve aqui é a estrutura geral, não o conteúdo específico das cerimônias. A Maçonaria pode ser explicada sem que se exponham os elementos que pertencem à esfera interna de seus trabalhos.</p>
+
+    <h2>O Templo</h2>
+
+    <p>Quando uma Loja se reúne, ela pode fazê-lo em um espaço específico: o <strong>Templo</strong>.</p>
+
+    <p>O Templo é o espaço físico destinado aos trabalhos maçônicos, conforme as regras e tradições da organização. Não é um local de culto religioso, embora seja um espaço carregado de significado simbólico. Sua disposição, seus elementos e sua atmosfera remetem à linguagem da construção e da geometria. A configuração do Templo varia conforme o Rito adotado e a tradição da Loja.</p>
+
+    <p>Mas é preciso distinguir com clareza: uma Loja não é apenas o prédio. O espaço físico é o <strong>cenário</strong>. A Loja é a <strong>comunidade</strong>. Sem a comunidade, o Templo é apenas uma sala. Com a comunidade, ele se torna o lugar onde a tradição ganha vida, onde as palavras ganham sentido e onde o simbolismo deixa de ser abstração para se tornar experiência.</p>
+
+    <h2>A administração de uma Loja</h2>
+
+    <p>Uma Loja possui estrutura administrativa e dirigentes.</p>
+
+    <p>De modo geral, pode-se dizer que uma Loja tem uma direção, cargos com responsabilidades específicas, reuniões administrativas, registros, calendário e deveres. Há um responsável principal, cujo título varia conforme a tradição, e outros oficiais que cuidam de áreas como secretaria, tesouraria, comunicação e cerimônias.</p>
+
+    <p>As decisões são tomadas em reuniões. Novos membros são propostos e avaliados. As atividades são planejadas. As contas são prestadas. A vida administrativa de uma Loja segue procedimentos definidos pela jurisdição à qual ela pertence.</p>
+
+    <p>Isso não significa que todas as Lojas funcionem da mesma maneira. A estrutura varia conforme a Potência, a tradição e o porte da Loja. Alguns cargos existem em determinadas tradições e não em outras. Os nomes podem variar. As responsabilidades podem se distribuir de formas distintas. Quando a informação variar entre tradições, é mais honesto dizer isso do que fingir uniformidade.</p>
+
+    <p>O que importa compreender é que a Loja não é um espaço de improviso. Ela tem ordem, método e continuidade. A tradição se sustenta porque há estrutura.</p>
+
+    <h2>Loja e estrutura superior</h2>
+
+    <p>Uma Loja local não é necessariamente independente.</p>
+
+    <p>Na maioria dos casos, ela pertence a uma estrutura maior, que a administra ou jurisdiciona. Essa estrutura pode ser chamada de <strong>Grande Loja</strong>, <strong>Grande Oriente</strong>, <strong>Potência</strong> ou <strong>Obediência</strong>. Os termos variam conforme a tradição: Grande Loja é mais comum na tradição anglo-saxônica; Grande Oriente é mais frequente em tradições latinas, como a francesa e a brasileira; Potência e Obediência são termos genéricos que designam organizações maçônicas superiores.</p>
+
+    <p>Essas estruturas possuem regras próprias, constituições, rituais padronizados e critérios de reconhecimento. Elas administram as Lojas sob sua jurisdição, zelam pela regularidade da prática maçônica e representam a organização perante outras Potências.</p>
+
+    <p>Não existe uma única autoridade mundial governando toda a Maçonaria. Existem diferentes Potências, diferentes Obediências, diferentes tradições, e elas nem sempre se reconhecem mutuamente. Aquilo que alguém encontra em uma organização pode não ser idêntico ao que existe em outra. Isso não significa que uma seja verdadeira e outra falsa. Significa que a Maçonaria é plural.</p>
+
+    <h2>O visitante precisa entender</h2>
+
+    <p>Uma pessoa que procura conhecer a Maçonaria passa por um caminho que começa com a manifestação de interesse. Em algum momento, esse caminho leva ao contato com uma Loja ou Oficina. É nessa organização local que o contato institucional pode continuar. A Loja possui suas próprias regras e procedimentos. A decisão sobre ingresso pertence à organização responsável.</p>
+
+    <p>É fundamental compreender que <strong>não existe garantia de aceitação</strong>. Manifestar interesse não equivale a ser recebido. Preencher uma ficha, participar de uma conversa preliminar ou ser encaminhado por uma iniciativa de orientação não significa aprovação. Cada Loja, cada Potência, cada Obediência possui seus próprios critérios e etapas. A decisão final não pertence à MasonHubAcademy nem a qualquer outra organização que não seja aquela diretamente responsável pelo processo.</p>
+
+    <p>Essa clareza não é frieza. É respeito. Respeito por quem procura e respeito pela instituição.</p>
+
+    <h2>Lojas não são todas iguais</h2>
+
+    <p>Duas Lojas podem ser profundamente diferentes entre si.</p>
+
+    <p>Elas podem pertencer a jurisdições distintas. Podem adotar Ritos diferentes. Podem seguir tradições com ênfases diversas. Podem ter histórias, perfis, atividades, costumes e formas de organização que as tornam singulares.</p>
+
+    <p>Isso não significa necessariamente que uma seja verdadeira e outra falsa. Significa que a Maçonaria possui diversidade histórica e institucional. A riqueza da tradição maçônica está, em boa medida, nessa variedade. Quem procura uma Loja deve saber que encontrará uma expressão particular da Maçonaria, não uma suposta essência universal que todas as organizações reproduzem da mesma forma.</p>
+
+    <h2>Lojas masculinas, femininas e mistas</h2>
+
+    <p>A Maçonaria não é uma realidade única.</p>
+
+    <p>Existem organizações maçônicas masculinas, femininas e mistas. As regras de ingresso, organização e reconhecimento variam conforme a tradição e a jurisdição. Em alguns países, há Grandes Lojas femininas reconhecidas. Em outros, há Obediências mistas. No Brasil, a Maçonaria feminina tem crescido e se organizado, com fraternidades femininas que atuam de forma complementar às Lojas masculinas.</p>
+
+    <p>Não se deve apresentar uma estrutura como universalmente superior. As diferenças institucionais não são motivo para ataque ou disputa. São expressões de uma tradição que se desenvolveu de maneiras distintas ao longo da história. Reconhecer essa diversidade é mais honesto do que negá-la.</p>
+
+    <h2>A Loja e o candidato</h2>
+
+    <p>O que uma pessoa interessada deve compreender antes de procurar uma Loja?</p>
+
+    <ul>
+      <li><strong>Primeiro</strong>, que não existe garantia de aceitação.</li>
+      <li><strong>Segundo</strong>, que manifestar interesse não equivale a ser recebido.</li>
+      <li><strong>Terceiro</strong>, que preencher uma ficha ou participar de uma conversa preliminar não significa aprovação.</li>
+      <li><strong>Quarto</strong>, que a Loja ou organização competente possui seus próprios procedimentos.</li>
+      <li><strong>Quinto</strong>, que a decisão final não pertence à MasonHubAcademy nem a qualquer iniciativa de orientação.</li>
+    </ul>
+
+    <p>Essas são verdades simples, mas frequentemente esquecidas por quem chega cheio de expectativas. A Loja é uma comunidade que se reserva o direito de avaliar quem deseja ingressar. Esse direito não é arbitrariedade. É parte da natureza associativa da instituição.</p>
+
+    <h2>Respeito ao espaço reservado</h2>
+
+    <p>É possível ensinar sobre a Maçonaria sem divulgar conteúdo reservado.</p>
+
+    <p>Esta página não revela sinais, toques, palavras, senhas, procedimentos internos ou detalhes de cerimônias. Esses elementos pertencem à esfera interna dos trabalhos maçônicos e não são objeto de divulgação pública. Conhecer a estrutura de uma Loja não exige expor aquilo que pertence à intimidade de seus trabalhos.</p>
+
+    <p>A MasonHubAcademy explica a Maçonaria sem violar o que é reservado. O que é público, é explicado. O que é interno, é respeitado. Essa distinção é fundamental para uma abordagem responsável do tema.</p>
+
+    <h2>A função social</h2>
+
+    <p>Diferentes Lojas e organizações maçônicas, em diferentes países e períodos, desenvolveram atividades filantrópicas e sociais.</p>
+
+    <p>Há registros de apoio a escolas, hospitais, campanhas de arrecadação, projetos comunitários e iniciativas de auxílio a pessoas em situação de vulnerabilidade. Isso é um fato histórico. Mas não se pode dizer que toda Loja possui os mesmos projetos ou que todas as organizações maçônicas adotam os mesmos programas filantrópicos.</p>
+
+    <p>A dimensão social existe em muitas tradições, mas assume formas distintas conforme o contexto, a jurisdição e a Loja. O que se pode afirmar é que a filantropia é uma dimensão presente na história da Maçonaria, e continua presente, de maneiras variadas, na contemporaneidade. Apresentar essa dimensão sem generalizar é mais honesto do que transformá-la em propaganda.</p>
+
+    <h2>Uma Loja também tem memória</h2>
+
+    <p>Uma Loja acumula coisas que não se veem à primeira vista.</p>
+
+    <p>Ela guarda atas, nomes, histórias, fotografias, documentos, tradições e memórias. Cada reunião registrada, cada decisão tomada, cada membro que passou por ali deixa um rastro. Com o tempo, esse rastro se transforma em arquivo, e o arquivo se transforma em memória. A história de uma Loja pode ser uma pequena janela para compreender mudanças maiores da sociedade.</p>
+
+    <p>Uma Loja é construída duas vezes. Primeiro pelos seus elementos físicos, pelas paredes, pelo espaço, pelos objetos que a compõem. Depois, e sobretudo, pela memória das pessoas que passaram por ela. É essa segunda construção que dá sentido à primeira. Sem memória, uma Loja é apenas um lugar. Com memória, ela se torna uma tradição viva.</p>
+
+    <h2>Loja, Oficina e MasonHubAcademy</h2>
+
+    <p>A MasonHubAcademy não é uma Loja.</p>
+
+    <p>Não é uma Oficina.</p>
+
+    <p>Não é uma Potência.</p>
+
+    <p>Não é uma Obediência.</p>
+
+    <p>Não substitui essas estruturas.</p>
+
+    <p>Seu papel é facilitar conhecimento, orientação preliminar e aproximação responsável. A MasonHubAcademy apresenta a estrutura para que o visitante saiba o que está procurando antes de bater à porta de uma organização real. Ela não promete encaminhamento, não garante aceitação, não se apresenta como autoridade maçônica. Ela oferece informação de qualidade e contexto histórico para quem deseja compreender a Maçonaria antes de dar qualquer passo institucional.</p>
+
+    <p>Essa é uma função modesta, mas necessária. Conhecer antes de procurar uma porta é mais do que uma precaução. É uma forma de respeito por si mesmo e pela instituição que se pretende procurar.</p>
+
+    <h2>A porta</h2>
+
+    <p>Uma porta pode despertar curiosidade. Mas atravessá-la exige compreender onde se está entrando.</p>
+
+    <p>Antes da porta existe informação. Depois da porta existe experiência. A MasonHubAcademy existe para ajudar o interessado a chegar à porta sabendo um pouco mais sobre aquilo que encontrará do outro lado.</p>
+
+    <p>Não se promete aceitação, iniciação, amizade, negócios, dinheiro, poder, influência ou benefícios pessoais. Não se faz marketing, não se faz proselitismo, não se ataca outras organizações. O que se oferece é conhecimento. O que se espera é que esse conhecimento ajude cada pessoa a decidir com lucidez se deseja ou não continuar o caminho.</p>
+
+    <p>A Maçonaria é vivenciada em organizações concretas. Essas organizações possuem Lojas ou Oficinas. Essas Lojas pertencem a estruturas maiores conforme sua jurisdição. Cada uma pode possuir características próprias. Por isso, quem deseja avançar precisa conhecer também como funcionam as Lojas e Oficinas.</p>
+
+    <h2>Fontes de pesquisa</h2>
+    <ul class="mha-sources">
+      <li>United Grand Lodge of England. What is a Lodge and Its Officers.</li>
+      <li>United Grand Lodge of England. About UGLE.</li>
+      <li>Museum of Freemasonry. Annual Report and Accounts.</li>
+      <li>Grande Oriente do Brasil. Constituição e Regulamento Geral.</li>
+      <li>Grande Oriente do Brasil. A Missão dos Veneráveis Mestres.</li>
+      <li>Grande Oriente do Brasil. Estrutura Organizacional.</li>
+      <li>Grande Loja do Brasil. Regulamento e Constituição.</li>
+      <li>Bogdan, Henrik; Snoek, Jan A. M. (eds.). Handbook of Freemasonry. Leiden: Brill, 2014.</li>
+      <li>Jacob, Margaret C. The Origins of Freemasonry: Facts and Fictions. Philadelphia: University of Pennsylvania Press, 2006.</li>
+      <li>Önnerfors, Andreas. Freemasonry: A Very Short Introduction. Oxford University Press.</li>
+      <li>Mackey, Albert G. An Encyclopaedia of Freemasonry.</li>
+      <li>Confederação Maçônica do Brasil. Ritos Maçônicos.</li>
+      <li>Confederação da Maçonaria Simbólica do Brasil.</li>
+      <li>Grande Oriente do Brasil, Paraná. Ações Filantrópicas e Sociais.</li>
+      <li>Grande Oriente do Brasil, São Paulo. Lojas e Oficinas.</li>
+      <li>Assembleia Legislativa de Minas Gerais. Projetos de Utilidade Pública de Lojas Maçônicas.</li>
+    </ul>
+
+  </main>
+
+  <a href="/" class="mha-back">← Voltar ao início</a>
+
+  <footer class="mha-foot">
+    MasonHubAcademy® · Todos os direitos reservados
+  </footer>
+</article>
+
+</body>
+</html>
