@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="color-scheme" content="dark">
+<title>Consultoria Maçônica — MasonHubAcademy</title>
+<meta name="description" content="Consultoria Maçônica individual, por videoconferência, com o M.'.M.'. Gerson Luis. Até 20 minutos. Para pretensos candidatos que buscam esclarecimentos honestos, dentro do que pode ser dito fora do Templo.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='78' font-size='90'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
+<style>
+  html, body { margin: 0; padding: 0; background: #05070e; -webkit-text-size-adjust: 100%; }
+  body { padding: clamp(4px, 1.2vw, 12px); font-size: 16px; overflow-x: hidden; }
+
+  #mha-bg {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background: radial-gradient(120% 90% at 50% -10%, #16203a 0%, #0b1120 42%, #05070e 100%);
+    overflow: hidden;
+  }
+  #mha-bg svg { position: absolute; color: #c9a227; filter: drop-shadow(0 0 40px rgba(201,162,39,.15)); }
+  #mha-bg .sym-compass { top: 2%; left: 50%; transform: translateX(-50%); width: clamp(260px, 45vw, 520px); height: auto; opacity: 0.05; }
+  #mha-bg .sym-ashlar { bottom: 8%; left: 4%; width: clamp(90px, 13vw, 150px); height: auto; opacity: 0.04; }
+  #mha-bg .sym-g { bottom: 6%; right: 4%; width: clamp(80px, 12vw, 140px); height: auto; opacity: 0.06; }
+
+  /* MENU SANDUÍCHE */
+  .mha-menu-btn {
+    position: fixed; top: 14px; right: 14px; z-index: 1000;
+    width: 46px; height: 46px; padding: 0;
+    border-radius: 12px;
+    border: 1px solid rgba(201,162,39,.45);
+    background: linear-gradient(180deg, rgba(11,17,32,.92), rgba(5,7,14,.92));
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 8px 24px rgba(0,0,0,.5);
+    cursor: pointer; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 5px;
+    -webkit-tap-highlight-color: transparent;
+    transition: border-color .2s, transform .15s;
+  }
+  .mha-menu-btn:hover { border-color: rgba(232,210,154,.75); }
+  .mha-menu-btn:active { transform: scale(.96); }
+  .mha-menu-btn:focus-visible { outline: 2px solid #e8d29a; outline-offset: 3px; }
+  .mha-menu-btn span { display: block; width: 22px; height: 2px; border-radius: 2px; background: #e8d29a; transition: transform .25s ease, opacity .2s ease; }
+  .mha-menu-btn.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .mha-menu-btn.is-open span:nth-child(2) { opacity: 0; }
+  .mha-menu-btn.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mha-menu-overlay {
+    position: fixed; inset: 0; z-index: 998;
+    background: rgba(5,7,14,.72);
+    backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+    opacity: 0; visibility: hidden;
+    transition: opacity .25s ease, visibility .25s ease;
+  }
+  .mha-menu-overlay.is-open { opacity: 1; visibility: visible; }
+
+  .mha-menu-panel {
+    position: fixed; top: 0; right: 0; bottom: 0; z-index: 999;
+    width: min(88%, 340px); max-width: 100%;
+    background: linear-gradient(180deg, #0f1628 0%, #080c17 100%);
+    border-left: 1px solid rgba(201,162,39,.28);
+    box-shadow: -20px 0 60px rgba(0,0,0,.7);
+    transform: translateX(100%);
+    transition: transform .3s cubic-bezier(.4,.0,.2,1);
+    overflow-y: auto; -webkit-overflow-scrolling: touch;
+    display: flex; flex-direction: column;
+    padding: 22px 0 24px;
+  }
+  .mha-menu-panel.is-open { transform: translateX(0); }
+  .mha-menu-panel::-webkit-scrollbar { width: 6px; }
+  .mha-menu-panel::-webkit-scrollbar-thumb { background: rgba(201,162,39,.3); border-radius: 8px; }
+  .mha-menu-head { padding: 0 22px 18px; border-bottom: 1px solid rgba(201,162,39,.18); }
+  .mha-menu-head h2 { margin: 0; font-family: Georgia, serif; font-weight: 400;
+    font-size: 1.15rem; color: #f7f2e4; letter-spacing: .01em;
+    text-shadow: 0 0 24px rgba(201,162,39,.3); }
+  .mha-menu-head p { margin: 4px 0 0; font-size: .62rem; letter-spacing: .22em;
+    text-transform: uppercase; color: #b9a980; }
+  .mha-menu-nav { display: flex; flex-direction: column; padding: 14px 0; margin: 0; }
+  .mha-menu-nav a {
+    display: flex; align-items: center; gap: 12px;
+    padding: 13px 22px; color: #dde3f0; text-decoration: none;
+    font-size: .95rem; font-weight: 500;
+    border-left: 3px solid transparent;
+    transition: background .18s, border-color .18s, color .18s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mha-menu-nav a::before { content: "✦"; color: rgba(232,210,154,.55); font-size: .82rem; flex: 0 0 auto; }
+  .mha-menu-nav a:hover,
+  .mha-menu-nav a:focus-visible {
+    background: rgba(201,162,39,.08);
+    border-left-color: rgba(232,210,154,.7);
+    color: #fff; outline: none;
+  }
+  .mha-menu-nav a.is-active {
+    background: rgba(201,162,39,.13);
+    border-left-color: #e8d29a;
+    color: #f5ecd6; font-weight: 600;
+  }
+  .mha-menu-foot { margin-top: auto; padding: 18px 22px 0;
+    border-top: 1px solid rgba(201,162,39,.15);
+    font-size: .62rem; letter-spacing: .14em;
+    text-transform: uppercase; color: rgba(154,166,191,.62);
+    text-align: center; }
+
+  @media (max-width: 400px) {
+    .mha-menu-btn { top: 10px; right: 10px; width: 42px; height: 42px; }
+    .mha-menu-panel { width: 92%; }
+  }
+
+  /* PÁGINA */
+  #mha-page {
+    position: relative; z-index: 1; width: 100%; max-width: 880px; margin: 0 auto;
+    padding: clamp(14px, 3vw, 32px); border-radius: clamp(10px, 2.4vw, 18px);
+    border: 1px solid rgba(201, 162, 39, .2);
+    background: linear-gradient(180deg, rgba(11,17,32,.85), rgba(5,7,14,.92));
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    color: #e9edf7;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.65; box-shadow: 0 24px 70px rgba(0,0,0,.55);
+    -webkit-font-smoothing: antialiased;
+  }
+  #mha-page * { box-sizing: border-box; }
+  .mha-head { text-align: center; }
+  .mha-brand { margin: 0; font-family: Georgia, serif; font-weight: 400;
+    font-size: clamp(1.05rem, 5vw, 1.9rem); letter-spacing: .015em;
+    color: #f7f2e4; text-shadow: 0 0 34px rgba(201,162,39,.28); }
+  .mha-sub { margin: 4px 0 0; font-size: clamp(.58rem, 2vw, .74rem);
+    letter-spacing: .24em; text-transform: uppercase; color: #b9a980; }
+  .mha-badge { display: inline-block; margin: clamp(8px,2vw,14px) auto 0; padding: 5px 12px;
+    border: 1px solid rgba(201,162,39,.42); border-radius: 999px;
+    font-size: clamp(.55rem,1.9vw,.7rem); letter-spacing: .18em; text-transform: uppercase;
+    color: #e8d29a; background: linear-gradient(180deg, rgba(201,162,39,.16), rgba(201,162,39,.03)); }
+  .mha-light { height: 1px; width: min(100%,520px); margin: clamp(10px,2.2vw,18px) auto 0; background: linear-gradient(90deg, transparent, rgba(232,210,154,.55), transparent); }
+
+  .mha-content { margin-top: clamp(18px,3vw,26px); }
+
+  /* ABERTURA */
+  .mha-opening {
+    font-family: Georgia, serif; font-style: italic; font-weight: 400;
+    font-size: clamp(.98rem, 2.9vw, 1.1rem);
+    line-height: 1.7; color: #e9edf7;
+    text-align: center;
+    max-width: 620px;
+    margin: 0 auto clamp(26px,4vw,38px);
+  }
+  .mha-opening strong { color: #e8d29a; font-style: normal; font-weight: 600; }
+
+  /* PAINEL DE DADOS */
+  .mha-panel {
+    display: grid; grid-template-columns: 1fr;
+    margin: 0 0 clamp(24px,4vw,36px);
+    border: 1px solid rgba(201,162,39,.22);
+    border-radius: 14px; overflow: hidden;
+    background: linear-gradient(180deg, rgba(255,255,255,.028), rgba(255,255,255,.008));
+  }
+  @media (min-width: 620px) { .mha-panel { grid-template-columns: repeat(3, 1fr); } }
+  .mha-panel-item {
+    padding: clamp(14px,2.4vw,20px) clamp(14px,2.4vw,18px);
+    text-align: center;
+    border-bottom: 1px solid rgba(201,162,39,.14);
+  }
+  .mha-panel-item:last-child { border-bottom: 0; }
+  @media (min-width: 620px) {
+    .mha-panel-item { border-bottom: 0; border-right: 1px solid rgba(201,162,39,.14); }
+    .mha-panel-item:last-child { border-right: 0; }
+  }
+  .mha-panel-label {
+    display: block;
+    font-size: clamp(.6rem,1.9vw,.68rem);
+    letter-spacing: .18em; text-transform: uppercase;
+    color: #b9a980; margin-bottom: 6px;
+  }
+  .mha-panel-value {
+    display: block;
+    font-family: Georgia, serif; font-weight: 400;
+    font-size: clamp(.98rem, 3vw, 1.15rem);
+    color: #f5ecd6; line-height: 1.3;
+  }
+  .mha-panel-value--gold { color: #e8d29a; }
+
+  /* PAGAMENTO */
+  .mha-pay {
+    margin-bottom: clamp(22px,3.6vw,32px);
+    padding: clamp(18px,2.8vw,24px);
+    border: 1px solid rgba(201,162,39,.22);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(255,255,255,.028), rgba(255,255,255,.008));
+  }
+  .mha-pay-title {
+    margin: 0 0 8px; font-family: Georgia, serif; font-weight: 400;
+    font-size: clamp(.85rem, 2.4vw, .95rem);
+    color: #e8d29a;
+    letter-spacing: .16em; text-transform: uppercase;
+  }
+  .mha-pay-intro {
+    margin: 0 0 clamp(14px,2.4vw,18px);
+    font-size: clamp(.82rem, 2.4vw, .92rem);
+    color: #b6bed0; line-height: 1.6;
+  }
+  .mha-pay-row {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px;
+    padding: 14px 0;
+  }
+  .mha-pay-row + .mha-pay-row { border-top: 1px solid rgba(201,162,39,.14); }
+  .mha-pay-info { flex: 1 1 auto; min-width: 0; }
+  .mha-pay-label {
+    display: block;
+    font-size: clamp(.6rem,1.9vw,.68rem);
+    letter-spacing: .16em; text-transform: uppercase;
+    color: #b9a980; margin-bottom: 3px;
+  }
+  .mha-pay-value {
+    display: block;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: clamp(.86rem, 2.6vw, .98rem);
+    color: #f5ecd6;
+    letter-spacing: -.005em;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+
+  /* BOTÃO DE COPIAR */
+  .mha-copy-btn {
+    flex: 0 0 auto;
+    height: 36px; padding: 0 14px;
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 8px;
+    border-radius: 9px;
+    border: 1px solid rgba(201,162,39,.32);
+    background: rgba(201,162,39,.08);
+    color: #e8d29a;
+    cursor: pointer;
+    font: inherit;
+    font-size: .8rem; font-weight: 500;
+    letter-spacing: .02em;
+    transition: background .15s, border-color .15s, color .15s, transform .1s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mha-copy-btn:hover { background: rgba(201,162,39,.20); border-color: rgba(232,210,154,.6); color: #fff; }
+  .mha-copy-btn:active { transform: scale(.96); }
+  .mha-copy-btn:focus-visible { outline: 2px solid #e8d29a; outline-offset: 2px; }
+  .mha-copy-btn.is-copied { background: rgba(90,180,90,.22); border-color: rgba(130,220,130,.65); color: #d8ffd8; }
+  .mha-copy-btn svg { width: 14px; height: 14px; stroke-width: 1.8; flex: 0 0 auto; }
+
+  /* POLÍTICA DE CANCELAMENTO */
+  .mha-policy {
+    margin-bottom: clamp(22px,3.6vw,32px);
+    padding: clamp(18px,2.8vw,24px);
+    border: 1px solid rgba(201,162,39,.18);
+    border-left: 3px solid rgba(201,162,39,.55);
+    border-radius: 12px;
+    background: linear-gradient(180deg, rgba(201,162,39,.05), rgba(201,162,39,.01));
+  }
+  .mha-policy-title {
+    margin: 0 0 12px;
+    font-family: Georgia, serif; font-weight: 400;
+    font-size: clamp(.85rem, 2.4vw, .95rem);
+    color: #e8d29a;
+    letter-spacing: .16em; text-transform: uppercase;
+  }
+  .mha-policy-list {
+    margin: 0; padding: 0; list-style: none;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .mha-policy-list li {
+    position: relative;
+    padding-left: 18px;
+    font-size: clamp(.82rem, 2.4vw, .92rem);
+    color: #dde3f0; line-height: 1.55;
+  }
+  .mha-policy-list li::before {
+    content: "✦";
+    position: absolute; left: 0; top: 0;
+    color: rgba(232,210,154,.7);
+    font-size: .78em; line-height: 1.9;
+  }
+  .mha-policy-list strong { color: #f5ecd6; font-weight: 600; }
+
+  /* BOTÃO CTA */
+  .mha-cta-wrap {
+    margin-top: clamp(20px,3.5vw,32px);
+    text-align: center;
+  }
+  .mha-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 15px 30px; border-radius: 12px;
+    border: 1px solid rgba(201,162,39,.55);
+    background: linear-gradient(180deg, rgba(201,162,39,.22), rgba(201,162,39,.08));
+    color: #f5ecd6; text-decoration: none;
+    font-size: clamp(.82rem, 2.5vw, .94rem);
+    font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+    transition: transform .12s, background .18s, border-color .18s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mha-cta:hover {
+    background: linear-gradient(180deg, rgba(201,162,39,.34), rgba(201,162,39,.14));
+    border-color: rgba(232,210,154,.8); color: #fff;
+  }
+  .mha-cta:active { transform: scale(.98); }
+  .mha-cta:focus-visible { outline: 2px solid #e8d29a; outline-offset: 3px; }
+  .mha-cta::before { content: "✦"; font-size: .9em; color: #e8d29a; }
+
+  /* TOAST */
+  .mha-toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
+    z-index: 2000; padding: 11px 18px; border-radius: 10px;
+    background: linear-gradient(180deg, rgba(20,28,48,.96), rgba(10,14,26,.96));
+    border: 1px solid rgba(232,210,154,.5);
+    color: #f5ecd6;
+    font-size: .86rem; letter-spacing: .03em;
+    box-shadow: 0 12px 40px rgba(0,0,0,.55), 0 0 20px rgba(232,210,154,.15);
+    opacity: 0; pointer-events: none;
+    transition: opacity .25s, transform .25s;
+  }
+  .mha-toast.is-show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* VOLTAR / RODAPÉ */
+  .mha-back { display: inline-flex; align-items: center; gap: 6px;
+    margin-top: clamp(20px,3vw,28px); padding: 11px 18px; border-radius: 10px;
+    border: 1px solid rgba(201,162,39,.4);
+    background: linear-gradient(180deg, rgba(201,162,39,.14), rgba(201,162,39,.04));
+    color: #f2e6c6; text-decoration: none;
+    font-size: clamp(.78rem,2.4vw,.88rem); font-weight: 600;
+    letter-spacing: .05em; text-transform: uppercase;
+    -webkit-tap-highlight-color: transparent; }
+  .mha-back:hover { background: linear-gradient(180deg, rgba(201,162,39,.26), rgba(201,162,39,.10));
+    border-color: rgba(232,210,154,.7); color: #fff; }
+  .mha-foot { margin-top: clamp(20px,4vw,32px); padding-top: clamp(12px,2vw,18px);
+    border-top: 1px solid rgba(201,162,39,.14); text-align: center;
+    font-size: clamp(.58rem,1.8vw,.66rem); letter-spacing: .12em;
+    text-transform: uppercase; color: rgba(154,166,191,.68); }
+  .mha-foot a { color: #b9a980; text-decoration: none; }
+  .mha-foot a:hover { color: #e8d29a; text-decoration: underline; text-underline-offset: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mha-menu-panel, .mha-menu-overlay, .mha-menu-btn span,
+    .mha-toast, .mha-copy-btn, .mha-cta { animation: none; transition: none; }
+  }
+  @media (max-width: 400px) {
+    .mha-brand { font-size: clamp(.92rem, 5vw, 1.4rem); }
+    .mha-sub { font-size: .56rem; letter-spacing: .18em; }
+    .mha-badge { font-size: .52rem; padding: 4px 10px; letter-spacing: .14em; }
+    .mha-copy-btn { height: 34px; padding: 0 11px; font-size: .76rem; gap: 6px; }
+    .mha-pay-row { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<div id="mha-bg" aria-hidden="true">
+  <svg class="sym-compass" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="100" cy="30" r="7"/>
+    <path d="M100 37 L40 170"/>
+    <path d="M100 37 L160 170"/>
+    <path d="M40 170 L100 130 L160 170"/>
+  </svg>
+  <svg class="sym-ashlar" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round">
+    <path d="M30 70 L100 30 L170 70 L170 150 L100 190 L30 150 Z"/>
+    <path d="M30 70 L100 110 L170 70"/>
+    <path d="M100 110 L100 190"/>
+  </svg>
+  <svg class="sym-g" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="100" cy="100" r="80" stroke-width="3"/>
+    <path d="M135 70 A 45 45 0 1 0 145 100 L100 100"/>
+  </svg>
+</div>
+
+<button id="mha-menu-btn" class="mha-menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mha-menu-panel">
+  <span></span><span></span><span></span>
+</button>
+
+<div id="mha-menu-overlay" class="mha-menu-overlay" aria-hidden="true"></div>
+
+<aside id="mha-menu-panel" class="mha-menu-panel" role="navigation" aria-label="Menu principal">
+  <div class="mha-menu-head">
+    <h2>MasonHubAcademy</h2>
+    <p>Conhecimento antes da Porta</p>
+  </div>
+  <nav class="mha-menu-nav">
+    <a href="/">Início · Guardião</a>
+    <a href="/o-que-e-maconaria.html">O que é Maçonaria</a>
+    <a href="/historia-da-maconaria.html">História</a>
+    <a href="/ritos-e-tradicoes.html">Ritos e Tradições</a>
+    <a href="/mitos-e-verdades.html">Mitos e Verdades</a>
+    <a href="/onde-a-maconaria-acontece.html">Onde Acontece</a>
+    <a href="/parceiros.html">Rede de Irmãos</a>
+    <a href="/consultoria.html" class="is-active">Consultoria</a>
+    <a href="/politica-de-privacidade.html">Política de Privacidade</a>
+    <a href="/termos-de-uso.html">Termos de Uso</a>
+  </nav>
+  <div class="mha-menu-foot">
+    MasonHubAcademy® · Atendimento preliminar
+  </div>
+</aside>
+
+<article id="mha-page">
+  <header class="mha-head">
+    <h1 class="mha-brand">MasonHubAcademy</h1>
+    <p class="mha-sub">Templo · Geometria · Luz</p>
+    <div class="mha-badge">Consultoria Maçônica</div>
+    <div class="mha-light" aria-hidden="true"></div>
+  </header>
+
+  <main class="mha-content">
+    <p class="mha-opening">
+      Pretenso Candidato(a), esta consultoria se destina a esclarecimentos com limites — porque nada interno pode ser revelado. Ela é conduzida pelo <strong>M.'.M.'. Gerson Luis</strong> e existe para acolher dúvidas honestas, dentro do que é permitido dizer fora do Templo. Não substitui a Porta, nem antecipa a Iniciação. Apenas ilumina o que pode ser iluminado.
+    </p>
+
+    <div class="mha-panel">
+      <div class="mha-panel-item">
+        <span class="mha-panel-label">Duração</span>
+        <span class="mha-panel-value">Até 20 minutos</span>
+      </div>
+      <div class="mha-panel-item">
+        <span class="mha-panel-label">Formato</span>
+        <span class="mha-panel-value">Google Meet</span>
+      </div>
+      <div class="mha-panel-item">
+        <span class="mha-panel-label">Investimento</span>
+        <span class="mha-panel-value mha-panel-value--gold">R$ 200,00</span>
+      </div>
+    </div>
+
+    <div class="mha-pay">
+      <h2 class="mha-pay-title">Pagamento e comprovante</h2>
+      <p class="mha-pay-intro">
+        A consultoria é confirmada após o recebimento do comprovante. Pague via Pix para o CPF abaixo e envie o comprovante para o e-mail indicado. A verificação é manual e ocorre antes do horário agendado.
+      </p>
+
+      <div class="mha-pay-row">
+        <div class="mha-pay-info">
+          <span class="mha-pay-label">Pix · CPF</span>
+          <span class="mha-pay-value" id="mha-pix-value">222.028.968-05</span>
+        </div>
+        <button type="button" class="mha-copy-btn" data-copy="222.028.968-05" aria-label="Copiar CPF do Pix">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          <span>Copiar Pix</span>
+        </button>
+      </div>
+
+      <div class="mha-pay-row">
+        <div class="mha-pay-info">
+          <span class="mha-pay-label">Enviar comprovante</span>
+          <span class="mha-pay-value" id="mha-email-value">masonhubacademy@gmail.com</span>
+        </div>
+        <button type="button" class="mha-copy-btn" data-copy="masonhubacademy@gmail.com" aria-label="Copiar e-mail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          <span>Copiar E-mail</span>
+        </button>
+      </div>
+    </div>
+
+    <section class="mha-policy" aria-labelledby="mha-policy-title">
+      <h2 id="mha-policy-title" class="mha-policy-title">Política de Cancelamento</h2>
+      <ul class="mha-policy-list">
+        <li><strong>Cancelamento com 7 dias ou mais de antecedência:</strong> reembolso total, conforme o Código de Defesa do Consumidor.</li>
+        <li><strong>Cancelamento com menos de 7 dias de antecedência:</strong> sem reembolso.</li>
+        <li><strong>Não comparecimento no horário agendado:</strong> sem reembolso.</li>
+      </ul>
+    </section>
+
+    <div class="mha-cta-wrap">
+      <a class="mha-cta" href="https://calendar.app.google/3mHMBQX3uuvuwyuz6" target="_blank" rel="noopener noreferrer">Agendar consultoria</a>
+    </div>
+  </main>
+
+  <a href="/" class="mha-back">← Voltar ao início</a>
+
+  <footer class="mha-foot">
+    MasonHubAcademy® · <a href="/parceiros.html">Rede de Irmãos</a> · Todos os direitos reservados
+  </footer>
+</article>
+
+<div id="mha-toast" class="mha-toast" role="status" aria-live="polite">Copiado</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* =========================================================
+     MENU SANDUÍCHE
+     ========================================================= */
+  (function initMenu() {
+    var btn = document.getElementById('mha-menu-btn');
+    var panel = document.getElementById('mha-menu-panel');
+    var overlay = document.getElementById('mha-menu-overlay');
+    if (!btn || !panel || !overlay) return;
+
+    function open() {
+      panel.classList.add('is-open');
+      overlay.classList.add('is-open');
+      btn.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+      btn.setAttribute('aria-label', 'Fechar menu');
+      document.documentElement.style.overflow = 'hidden';
+    }
+    function close() {
+      panel.classList.remove('is-open');
+      overlay.classList.remove('is-open');
+      btn.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Abrir menu');
+      document.documentElement.style.overflow = '';
+    }
+    function toggle() {
+      if (panel.classList.contains('is-open')) close(); else open();
+    }
+    btn.addEventListener('click', toggle);
+    overlay.addEventListener('click', close);
+    panel.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', close); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && panel.classList.contains('is-open')) close();
+    });
+  })();
+
+  /* =========================================================
+     TOAST
+     ========================================================= */
+  var toastEl = document.getElementById('mha-toast');
+  var toastTimer = null;
+  function showToast(msg) {
+    if (!toastEl) return;
+    toastEl.textContent = msg || 'Copiado';
+    toastEl.classList.add('is-show');
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () {
+      toastEl.classList.remove('is-show');
+    }, 2000);
+  }
+
+  /* =========================================================
+     COPIAR PARA A ÁREA DE TRANSFERÊNCIA
+     ========================================================= */
+  function copyText(text, onDone) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function(){ onDone(true); }, function(){ fallbackCopy(text, onDone); });
+    } else {
+      fallbackCopy(text, onDone);
+    }
+  }
+  function fallbackCopy(text, onDone) {
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      onDone(!!ok);
+    } catch (e) {
+      onDone(false);
+    }
+  }
+
+  var ICON_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>';
+
+  /* =========================================================
+     BOTÕES DE COPIAR (Pix, E-mail)
+     ========================================================= */
+  document.querySelectorAll('.mha-copy-btn[data-copy]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.getAttribute('data-copy') || '';
+      if (!text) return;
+      copyText(text, function (ok) {
+        if (!ok) { showToast('Não foi possível copiar'); return; }
+        var original = btn.innerHTML;
+        btn.classList.add('is-copied');
+        btn.innerHTML = ICON_CHECK + '<span>Copiado</span>';
+        showToast('Copiado');
+        setTimeout(function () {
+          btn.classList.remove('is-copied');
+          btn.innerHTML = original;
+        }, 1800);
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
