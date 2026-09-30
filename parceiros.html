@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="color-scheme" content="dark">
+<title>Rede de Irmãos — MasonHubAcademy</title>
+<meta name="description" content="Profissionais e empresas de Irmãos maçons. Curadoria séria, respeito à palavra dada.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='78' font-size='90'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
+<style>
+  html, body { margin: 0; padding: 0; background: #05070e; -webkit-text-size-adjust: 100%; }
+  body { padding: clamp(4px, 1.2vw, 12px); font-size: 16px; overflow-x: hidden; }
+
+  #mha-bg {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background: radial-gradient(120% 90% at 50% -10%, #16203a 0%, #0b1120 42%, #05070e 100%);
+    overflow: hidden;
+  }
+  #mha-bg svg { position: absolute; color: #c9a227; filter: drop-shadow(0 0 40px rgba(201,162,39,.15)); }
+  #mha-bg .sym-compass { top: 2%; left: 50%; transform: translateX(-50%); width: clamp(260px, 45vw, 520px); height: auto; opacity: 0.05; }
+  #mha-bg .sym-ashlar { bottom: 8%; left: 4%; width: clamp(90px, 13vw, 150px); height: auto; opacity: 0.04; }
+  #mha-bg .sym-g { bottom: 6%; right: 4%; width: clamp(80px, 12vw, 140px); height: auto; opacity: 0.06; }
+
+  /* MENU SANDUÍCHE */
+  .mha-menu-btn {
+    position: fixed; top: 14px; right: 14px; z-index: 1000;
+    width: 46px; height: 46px; padding: 0;
+    border-radius: 12px;
+    border: 1px solid rgba(201,162,39,.45);
+    background: linear-gradient(180deg, rgba(11,17,32,.92), rgba(5,7,14,.92));
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 8px 24px rgba(0,0,0,.5);
+    cursor: pointer; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 5px;
+    -webkit-tap-highlight-color: transparent;
+    transition: border-color .2s, transform .15s;
+  }
+  .mha-menu-btn:hover { border-color: rgba(232,210,154,.75); }
+  .mha-menu-btn:active { transform: scale(.96); }
+  .mha-menu-btn:focus-visible { outline: 2px solid #e8d29a; outline-offset: 3px; }
+  .mha-menu-btn span { display: block; width: 22px; height: 2px; border-radius: 2px; background: #e8d29a; transition: transform .25s ease, opacity .2s ease; }
+  .mha-menu-btn.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .mha-menu-btn.is-open span:nth-child(2) { opacity: 0; }
+  .mha-menu-btn.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mha-menu-overlay {
+    position: fixed; inset: 0; z-index: 998;
+    background: rgba(5,7,14,.72);
+    backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+    opacity: 0; visibility: hidden;
+    transition: opacity .25s ease, visibility .25s ease;
+  }
+  .mha-menu-overlay.is-open { opacity: 1; visibility: visible; }
+
+  .mha-menu-panel {
+    position: fixed; top: 0; right: 0; bottom: 0; z-index: 999;
+    width: min(88%, 340px); max-width: 100%;
+    background: linear-gradient(180deg, #0f1628 0%, #080c17 100%);
+    border-left: 1px solid rgba(201,162,39,.28);
+    box-shadow: -20px 0 60px rgba(0,0,0,.7);
+    transform: translateX(100%);
+    transition: transform .3s cubic-bezier(.4,.0,.2,1);
+    overflow-y: auto; -webkit-overflow-scrolling: touch;
+    display: flex; flex-direction: column;
+    padding: 22px 0 24px;
+  }
+  .mha-menu-panel.is-open { transform: translateX(0); }
+  .mha-menu-panel::-webkit-scrollbar { width: 6px; }
+  .mha-menu-panel::-webkit-scrollbar-thumb { background: rgba(201,162,39,.3); border-radius: 8px; }
+  .mha-menu-head { padding: 0 22px 18px; border-bottom: 1px solid rgba(201,162,39,.18); }
+  .mha-menu-head h2 { margin: 0; font-family: Georgia, serif; font-weight: 400;
+    font-size: 1.15rem; color: #f7f2e4; letter-spacing: .01em;
+    text-shadow: 0 0 24px rgba(201,162,39,.3); }
+  .mha-menu-head p { margin: 4px 0 0; font-size: .62rem; letter-spacing: .22em;
+    text-transform: uppercase; color: #b9a980; }
+  .mha-menu-nav { display: flex; flex-direction: column; padding: 14px 0; margin: 0; }
+  .mha-menu-nav a {
+    display: flex; align-items: center; gap: 12px;
+    padding: 13px 22px; color: #dde3f0; text-decoration: none;
+    font-size: .95rem; font-weight: 500;
+    border-left: 3px solid transparent;
+    transition: background .18s, border-color .18s, color .18s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mha-menu-nav a::before { content: "✦"; color: rgba(232,210,154,.55); font-size: .82rem; flex: 0 0 auto; }
+  .mha-menu-nav a:hover,
+  .mha-menu-nav a:focus-visible {
+    background: rgba(201,162,39,.08);
+    border-left-color: rgba(232,210,154,.7);
+    color: #fff; outline: none;
+  }
+  .mha-menu-nav a.is-active {
+    background: rgba(201,162,39,.13);
+    border-left-color: #e8d29a;
+    color: #f5ecd6; font-weight: 600;
+  }
+  .mha-menu-foot { margin-top: auto; padding: 18px 22px 0;
+    border-top: 1px solid rgba(201,162,39,.15);
+    font-size: .62rem; letter-spacing: .14em;
+    text-transform: uppercase; color: rgba(154,166,191,.62);
+    text-align: center; }
+
+  @media (max-width: 400px) {
+    .mha-menu-btn { top: 10px; right: 10px; width: 42px; height: 42px; }
+    .mha-menu-panel { width: 92%; }
+  }
+
+  /* PÁGINA */
+  #mha-page {
+    position: relative; z-index: 1; width: 100%; max-width: 880px; margin: 0 auto;
+    padding: clamp(14px, 3vw, 32px); border-radius: clamp(10px, 2.4vw, 18px);
+    border: 1px solid rgba(201, 162, 39, .2);
+    background: linear-gradient(180deg, rgba(11,17,32,.85), rgba(5,7,14,.92));
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    color: #e9edf7;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.65; box-shadow: 0 24px 70px rgba(0,0,0,.55);
+    -webkit-font-smoothing: antialiased;
+  }
+  #mha-page * { box-sizing: border-box; }
+  .mha-head { text-align: center; }
+  .mha-brand { margin: 0; font-family: Georgia, serif; font-weight: 400;
+    font-size: clamp(1.05rem, 5vw, 1.9rem); letter-spacing: .015em;
+    color: #f7f2e4; text-shadow: 0 0 34px rgba(201,162,39,.28); }
+  .mha-sub { margin: 4px 0 0; font-size: clamp(.58rem, 2vw, .74rem);
+    letter-spacing: .24em; text-transform: uppercase; color: #b9a980; }
+  .mha-badge { display: inline-block; margin: clamp(8px,2vw,14px) auto 0; padding: 5px 12px;
+    border: 1px solid rgba(201,162,39,.42); border-radius: 999px;
+    font-size: clamp(.55rem,1.9vw,.7rem); letter-spacing: .18em; text-transform: uppercase;
+    color: #e8d29a; background: linear-gradient(180deg, rgba(201,162,39,.16), rgba(201,162,39,.03)); }
+  .mha-light { height: 1px; width: min(100%,520px); margin: clamp(10px,2.2vw,18px) auto 0; background: linear-gradient(90deg, transparent, rgba(232,210,154,.55), transparent); }
+
+  .mha-content { margin-top: clamp(18px,3vw,26px); }
+  .mha-content > p:first-of-type {
+    font-size: clamp(1rem, 3vw, 1.08rem); color: #e9edf7;
+    text-align: center; margin: 0 auto clamp(24px,4vw,34px);
+    max-width: 620px;
+  }
+
+  /* BLOCO DE CATEGORIA */
+  .mha-cat {
+    margin-bottom: clamp(24px,4vw,36px);
+  }
+  .mha-cat h2 {
+    font-family: Georgia, serif; font-weight: 400;
+    font-size: clamp(1.05rem, 3.4vw, 1.3rem); line-height: 1.3;
+    color: #e8d29a; margin: 0 0 clamp(12px,2vw,16px);
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(201,162,39,.22);
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    font-size: clamp(.82rem, 2.4vw, .92rem);
+  }
+  .mha-cat h2::before { content: "✦  "; color: rgba(232,210,154,.65); font-size: .85em; }
+
+  /* CARTÃO DE PARCEIRO */
+  .mha-cards { display: flex; flex-direction: column; gap: 10px; }
+
+  .mha-card {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: clamp(12px, 2.2vw, 16px) clamp(12px, 2.2vw, 18px);
+    border-radius: 14px;
+    border: 1px solid rgba(201,162,39,.20);
+    background: linear-gradient(180deg, rgba(255,255,255,.030), rgba(255,255,255,.010));
+    transition: border-color .2s, background .2s;
+  }
+  .mha-card:hover { border-color: rgba(201,162,39,.40); background: linear-gradient(180deg, rgba(201,162,39,.05), rgba(201,162,39,.01)); }
+
+  .mha-mono {
+    flex: 0 0 52px; width: 52px; height: 52px; border-radius: 12px;
+    border: 1px solid rgba(201,162,39,.42);
+    background: radial-gradient(circle at 50% 30%, rgba(201,162,39,.22), rgba(201,162,39,.04));
+    display: flex; align-items: center; justify-content: center;
+    font-family: Georgia, serif; font-weight: 400;
+    font-size: 1.15rem; letter-spacing: .02em;
+    color: #e8d29a;
+    text-shadow: 0 0 12px rgba(232,210,154,.35);
+    user-select: none;
+  }
+
+  .mha-info { flex: 1 1 auto; min-width: 0; }
+  .mha-info-name {
+    font-family: Georgia, serif; font-weight: 400;
+    font-size: clamp(.98rem, 2.8vw, 1.08rem);
+    color: #f5ecd6; margin: 0 0 3px; line-height: 1.3;
+    overflow-wrap: anywhere;
+  }
+  .mha-info-desc {
+    font-size: clamp(.82rem, 2.4vw, .92rem);
+    color: #dde3f0; margin: 0 0 4px; line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+  .mha-info-city {
+    font-size: clamp(.74rem, 2.2vw, .82rem);
+    color: #b9a980; margin: 0 0 10px;
+    letter-spacing: .04em;
+  }
+  .mha-info-row {
+    display: flex; flex-wrap: wrap; align-items: center;
+    gap: 8px 14px; margin-top: 6px;
+  }
+  .mha-info-whats {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: #e8d29a; text-decoration: none;
+    font-size: clamp(.8rem, 2.4vw, .9rem);
+    font-weight: 500;
+    border-bottom: 1px dashed rgba(232,210,154,.4);
+    padding-bottom: 1px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mha-info-whats:hover { color: #fff; border-bottom-color: rgba(232,210,154,.8); }
+  .mha-info-whats::before { content: "💬"; font-size: .9em; filter: hue-rotate(-25deg) brightness(.9); }
+
+  .mha-info-site {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: clamp(.78rem, 2.3vw, .86rem);
+    color: #b6bed0;
+    max-width: 100%;
+    min-width: 0;
+  }
+  .mha-info-site .mha-site-text {
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    max-width: 200px;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    letter-spacing: -.01em;
+  }
+  .mha-copy-btn {
+    flex: 0 0 32px; width: 32px; height: 32px; padding: 0;
+    border-radius: 8px;
+    border: 1px solid rgba(201,162,39,.32);
+    background: rgba(201,162,39,.08);
+    color: #e8d29a;
+    cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: background .15s, border-color .15s, color .15s, transform .1s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mha-copy-btn:hover { background: rgba(201,162,39,.20); border-color: rgba(232,210,154,.6); color: #fff; }
+  .mha-copy-btn:active { transform: scale(.92); }
+  .mha-copy-btn:focus-visible { outline: 2px solid #e8d29a; outline-offset: 2px; }
+  .mha-copy-btn.is-copied { background: rgba(90,180,90,.25); border-color: rgba(130,220,130,.7); color: #d8ffd8; }
+  .mha-copy-btn svg { width: 15px; height: 15px; stroke-width: 1.8; }
+
+  /* ESTADOS (loading, vazio, erro) */
+  .mha-state {
+    text-align: center; padding: clamp(24px,5vw,48px) 12px;
+    color: #b6bed0; font-size: clamp(.86rem, 2.5vw, .96rem);
+  }
+  .mha-state strong { color: #e8d29a; font-weight: 600; }
+
+  /* BOTÃO SEJA UM PARCEIRO */
+  .mha-cta-wrap {
+    margin-top: clamp(28px,5vw,44px);
+    padding-top: clamp(18px,3vw,28px);
+    border-top: 1px solid rgba(201,162,39,.16);
+    text-align: center;
+  }
+  .mha-cta-text {
+    color: #dde3f0; font-size: clamp(.86rem, 2.5vw, .96rem);
+    margin: 0 auto clamp(14px,2.4vw,20px);
+    max-width: 480px;
+  }
+  .mha-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 26px; border-radius: 12px;
+    border: 1px solid rgba(201,162,39,.55);
+    background: linear-gradient(180deg, rgba(201,162,39,.22), rgba(201,162,39,.08));
+    color: #f5ecd6; text-decoration: none;
+    font-size: clamp(.82rem, 2.5vw, .94rem);
+    font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+    transition: transform .12s, background .18s, border-color .18s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mha-cta:hover {
+    background: linear-gradient(180deg, rgba(201,162,39,.34), rgba(201,162,39,.14));
+    border-color: rgba(232,210,154,.8); color: #fff;
+  }
+  .mha-cta:active { transform: scale(.98); }
+  .mha-cta:focus-visible { outline: 2px solid #e8d29a; outline-offset: 3px; }
+  .mha-cta::before { content: "✦"; font-size: .9em; color: #e8d29a; }
+
+  /* TOAST */
+  .mha-toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
+    z-index: 2000; padding: 11px 18px; border-radius: 10px;
+    background: linear-gradient(180deg, rgba(20,28,48,.96), rgba(10,14,26,.96));
+    border: 1px solid rgba(232,210,154,.5);
+    color: #f5ecd6;
+    font-size: .86rem; letter-spacing: .03em;
+    box-shadow: 0 12px 40px rgba(0,0,0,.55), 0 0 20px rgba(232,210,154,.15);
+    opacity: 0; pointer-events: none;
+    transition: opacity .25s, transform .25s;
+  }
+  .mha-toast.is-show {
+    opacity: 1; transform: translateX(-50%) translateY(0);
+  }
+
+  .mha-back { display: inline-flex; align-items: center; gap: 6px;
+    margin-top: clamp(20px,3vw,28px); padding: 11px 18px; border-radius: 10px;
+    border: 1px solid rgba(201,162,39,.4);
+    background: linear-gradient(180deg, rgba(201,162,39,.14), rgba(201,162,39,.04));
+    color: #f2e6c6; text-decoration: none;
+    font-size: clamp(.78rem,2.4vw,.88rem); font-weight: 600;
+    letter-spacing: .05em; text-transform: uppercase;
+    -webkit-tap-highlight-color: transparent; }
+  .mha-back:hover { background: linear-gradient(180deg, rgba(201,162,39,.26), rgba(201,162,39,.10));
+    border-color: rgba(232,210,154,.7); color: #fff; }
+  .mha-foot { margin-top: clamp(20px,4vw,32px); padding-top: clamp(12px,2vw,18px);
+    border-top: 1px solid rgba(201,162,39,.14); text-align: center;
+    font-size: clamp(.58rem,1.8vw,.66rem); letter-spacing: .12em;
+    text-transform: uppercase; color: rgba(154,166,191,.68); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mha-menu-panel, .mha-menu-overlay, .mha-menu-btn span,
+    .mha-toast, .mha-copy-btn, .mha-cta { animation: none; transition: none; }
+  }
+  @media (max-width: 400px) {
+    .mha-brand { font-size: clamp(.92rem, 5vw, 1.4rem); }
+    .mha-sub { font-size: .56rem; letter-spacing: .18em; }
+    .mha-badge { font-size: .52rem; padding: 4px 10px; letter-spacing: .14em; }
+    .mha-mono { flex-basis: 46px; width: 46px; height: 46px; font-size: 1rem; border-radius: 10px; }
+    .mha-info-site .mha-site-text { max-width: 140px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="mha-bg" aria-hidden="true">
+  <svg class="sym-compass" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="100" cy="30" r="7"/>
+    <path d="M100 37 L40 170"/>
+    <path d="M100 37 L160 170"/>
+    <path d="M40 170 L100 130 L160 170"/>
+  </svg>
+  <svg class="sym-ashlar" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round">
+    <path d="M30 70 L100 30 L170 70 L170 150 L100 190 L30 150 Z"/>
+    <path d="M30 70 L100 110 L170 70"/>
+    <path d="M100 110 L100 190"/>
+  </svg>
+  <svg class="sym-g" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="100" cy="100" r="80" stroke-width="3"/>
+    <path d="M135 70 A 45 45 0 1 0 145 100 L100 100"/>
+  </svg>
+</div>
+
+<button id="mha-menu-btn" class="mha-menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mha-menu-panel">
+  <span></span><span></span><span></span>
+</button>
+
+<div id="mha-menu-overlay" class="mha-menu-overlay" aria-hidden="true"></div>
+
+<aside id="mha-menu-panel" class="mha-menu-panel" role="navigation" aria-label="Menu principal">
+  <div class="mha-menu-head">
+    <h2>MasonHubAcademy</h2>
+    <p>Conhecimento antes da Porta</p>
+  </div>
+  <nav class="mha-menu-nav">
+    <a href="/">Início · Guardião</a>
+    <a href="/o-que-e-maconaria.html">O que é Maçonaria</a>
+    <a href="/historia-da-maconaria.html">História</a>
+    <a href="/ritos-e-tradicoes.html">Ritos e Tradições</a>
+    <a href="/mitos-e-verdades.html">Mitos e Verdades</a>
+    <a href="/onde-a-maconaria-acontece.html">Onde Acontece</a>
+    <a href="/parceiros.html" class="is-active">Rede de Irmãos</a>
+    <a href="/politica-de-privacidade.html">Política de Privacidade</a>
+    <a href="/termos-de-uso.html">Termos de Uso</a>
+  </nav>
+  <div class="mha-menu-foot">
+    MasonHubAcademy® · Atendimento preliminar
+  </div>
+</aside>
+
+<article id="mha-page">
+  <header class="mha-head">
+    <h1 class="mha-brand">MasonHubAcademy</h1>
+    <p class="mha-sub">Templo · Geometria · Luz</p>
+    <div class="mha-badge">Rede de Irmãos</div>
+    <div class="mha-light" aria-hidden="true"></div>
+  </header>
+
+  <main class="mha-content">
+    <p>Profissionais e empresas de Irmãos que honram a palavra dada. Cada nome aqui foi escolhido com o mesmo rigor do Guardião — <strong>curadoria, não vitrine</strong>.</p>
+
+    <div id="mha-lista" aria-live="polite">
+      <div class="mha-state">Carregando a Rede de Irmãos…</div>
+    </div>
+
+    <div class="mha-cta-wrap">
+      <p class="mha-cta-text">É Irmão, tem empresa ou presta serviços, e gostaria de estar nesta lista?</p>
+      <a class="mha-cta" id="mha-cta-parceiro" href="#" target="_blank" rel="noopener noreferrer">Seja um parceiro</a>
+    </div>
+  </main>
+
+  <a href="/" class="mha-back">← Voltar ao início</a>
+
+  <footer class="mha-foot">
+    MasonHubAcademy® · Todos os direitos reservados
+  </footer>
+</article>
+
+<div id="mha-toast" class="mha-toast" role="status" aria-live="polite">Link copiado</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* =========================================================
+     MENU SANDUÍCHE
+     ========================================================= */
+  (function initMenu() {
+    var btn = document.getElementById('mha-menu-btn');
+    var panel = document.getElementById('mha-menu-panel');
+    var overlay = document.getElementById('mha-menu-overlay');
+    if (!btn || !panel || !overlay) return;
+
+    function open() {
+      panel.classList.add('is-open');
+      overlay.classList.add('is-open');
+      btn.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+      btn.setAttribute('aria-label', 'Fechar menu');
+      document.documentElement.style.overflow = 'hidden';
+    }
+    function close() {
+      panel.classList.remove('is-open');
+      overlay.classList.remove('is-open');
+      btn.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Abrir menu');
+      document.documentElement.style.overflow = '';
+    }
+    function toggle() {
+      if (panel.classList.contains('is-open')) close(); else open();
+    }
+    btn.addEventListener('click', toggle);
+    overlay.addEventListener('click', close);
+    panel.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', close); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && panel.classList.contains('is-open')) close();
+    });
+  })();
+
+  /* =========================================================
+     TOAST
+     ========================================================= */
+  var toastEl = document.getElementById('mha-toast');
+  var toastTimer = null;
+  function showToast(msg) {
+    if (!toastEl) return;
+    toastEl.textContent = msg || 'Link copiado';
+    toastEl.classList.add('is-show');
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () {
+      toastEl.classList.remove('is-show');
+    }, 2000);
+  }
+
+  /* =========================================================
+     WHATSAPP — formata número para exibição
+     ========================================================= */
+  function formatWhatsapp(raw) {
+    var d = String(raw || '').replace(/\D/g, '');
+    if (d.length === 13) return '(' + d.slice(2,4) + ') ' + d.slice(4,9) + '-' + d.slice(9);
+    if (d.length === 12) return '(' + d.slice(2,4) + ') ' + d.slice(4,8) + '-' + d.slice(8);
+    if (d.length === 11) return '(' + d.slice(0,2) + ') ' + d.slice(2,7) + '-' + d.slice(7);
+    if (d.length === 10) return '(' + d.slice(0,2) + ') ' + d.slice(2,6) + '-' + d.slice(6);
+    return raw;
+  }
+
+  /* =========================================================
+     MONOGRAMA — iniciais
+     ========================================================= */
+  function getMonogram(name) {
+    var parts = String(name || '').trim().split(/\s+/).filter(function(p){ return p.length > 0; });
+    if (!parts.length) return '✦';
+    var a = parts[0].charAt(0).toUpperCase();
+    var b = parts.length > 1 ? parts[parts.length - 1].charAt(0).toUpperCase() : '';
+    return (a + b) || a;
+  }
+
+  /* =========================================================
+     COPIAR PARA A ÁREA DE TRANSFERÊNCIA
+     ========================================================= */
+  function copyText(text, onDone) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function(){ onDone(true); }, function(){ fallbackCopy(text, onDone); });
+    } else {
+      fallbackCopy(text, onDone);
+    }
+  }
+  function fallbackCopy(text, onDone) {
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      onDone(!!ok);
+    } catch (e) {
+      onDone(false);
+    }
+  }
+
+  /* =========================================================
+     ICONES SVG (inline)
+     ========================================================= */
+  var ICON_COPY = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>';
+  var ICON_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>';
+
+  /* =========================================================
+     CARREGAR E RENDERIZAR PARCEIROS
+     ========================================================= */
+  var CATEGORIA_ORDEM = [
+    'Beleza e Estética',
+    'Cabala e Esoterismo',
+    'Comércio',
+    'Consórcio',
+    'Educação',
+    'Imóveis',
+    'Indústria',
+    'Investimentos',
+    'Medicina',
+    'Serviços',
+    'Tecnologia',
+    'Veículos'
+  ];
+
+  function categoriaIndex(cat) {
+    var i = CATEGORIA_ORDEM.indexOf(cat);
+    return i === -1 ? 999 : i;
+  }
+
+  function renderParceiros(parceiros) {
+    var listaEl = document.getElementById('mha-lista');
+
+    if (!parceiros || !parceiros.length) {
+      listaEl.innerHTML = '<div class="mha-state">A <strong>Rede de Irmãos</strong> está sendo preparada.<br>Em breve, os primeiros nomes aparecerão aqui.</div>';
+      return;
+    }
+
+    // Agrupa por categoria
+    var grupos = {};
+    parceiros.forEach(function (p) {
+      var cat = String(p.categoria || 'Outros').trim() || 'Outros';
+      if (!grupos[cat]) grupos[cat] = [];
+      grupos[cat].push(p);
+    });
+
+    // Ordena categorias pela ordem definida
+    var cats = Object.keys(grupos).sort(function (a, b) {
+      var ia = categoriaIndex(a), ib = categoriaIndex(b);
+      if (ia !== ib) return ia - ib;
+      return a.localeCompare(b, 'pt-BR');
+    });
+
+    var html = '';
+    cats.forEach(function (cat) {
+      var lista = grupos[cat].slice().sort(function (a, b) {
+        return String(a.nome || '').localeCompare(String(b.nome || ''), 'pt-BR');
+      });
+
+      html += '<section class="mha-cat">';
+      html += '<h2>' + escapeHtml(cat) + '</h2>';
+      html += '<div class="mha-cards">';
+
+      lista.forEach(function (p) {
+        html += renderCard(p);
+      });
+
+      html += '</div></section>';
+    });
+
+    listaEl.innerHTML = html;
+
+    // Bind de copiar link (não clicável, apenas copy)
+    listaEl.querySelectorAll('.mha-copy-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var url = btn.getAttribute('data-url') || '';
+        if (!url) return;
+        copyText(url, function (ok) {
+          if (!ok) { showToast('Não foi possível copiar'); return; }
+          btn.classList.add('is-copied');
+          btn.innerHTML = ICON_CHECK;
+          showToast('Link copiado');
+          setTimeout(function () {
+            btn.classList.remove('is-copied');
+            btn.innerHTML = ICON_COPY;
+          }, 1800);
+        });
+      });
+    });
+  }
+
+  function renderCard(p) {
+    var mono = escapeHtml(getMonogram(p.nome));
+    var nome = escapeHtml(p.nome || '');
+    var desc = escapeHtml(p.descricao || '');
+    var cidade = escapeHtml(p.cidade || '');
+    var wpp = String(p.whatsapp || '').replace(/\D/g, '');
+    var wppFmt = escapeHtml(formatWhatsapp(p.whatsapp || ''));
+    var site = String(p.site || '').trim();
+
+    var html = '<article class="mha-card">';
+    html += '<div class="mha-mono" aria-hidden="true">' + mono + '</div>';
+    html += '<div class="mha-info">';
+    html += '<h3 class="mha-info-name">' + nome + '</h3>';
+    if (desc) html += '<p class="mha-info-desc">' + desc + '</p>';
+    if (cidade) html += '<p class="mha-info-city">' + cidade + '</p>';
+
+    html += '<div class="mha-info-row">';
+    if (wpp) {
+      var wppLink = 'https://wa.me/' + encodeURIComponent(wpp);
+      html += '<a class="mha-info-whats" href="' + wppLink + '" target="_blank" rel="noopener noreferrer">' + wppFmt + '</a>';
+    }
+    if (site) {
+      var siteEsc = escapeHtml(site);
+      html += '<span class="mha-info-site">';
+      html += '<span class="mha-site-text" title="' + siteEsc + '">' + siteEsc + '</span>';
+      html += '<button type="button" class="mha-copy-btn" data-url="' + siteEsc + '" aria-label="Copiar link do site">' + ICON_COPY + '</button>';
+      html += '</span>';
+    }
+    html += '</div>';
+
+    html += '</div></article>';
+    return html;
+  }
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  /* =========================================================
+     BOTÃO "SEJA UM PARCEIRO" — WhatsApp pré-preenchido
+     ========================================================= */
+  (function initCTA() {
+    var el = document.getElementById('mha-cta-parceiro');
+    if (!el) return;
+    var numero = '5511998723808';
+    var texto = 'Olá Ir.\'. Yuri, meu nome é [seu nome] e gostaria de ser parceiro do MasonHubAcademy (Rede de Irmãos).';
+    el.href = 'https://wa.me/' + numero + '?text=' + encodeURIComponent(texto);
+  })();
+
+  /* =========================================================
+     FETCH
+     ========================================================= */
+  function carregar() {
+    fetch('/api/parceiros', { cache: 'no-store' })
+      .then(function (r) {
+        if (!r.ok) throw new Error('http ' + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        var lista = (data && Array.isArray(data.parceiros)) ? data.parceiros : [];
+        renderParceiros(lista);
+      })
+      .catch(function (err) {
+        console.error('[parceiros] erro:', err);
+        var listaEl = document.getElementById('mha-lista');
+        listaEl.innerHTML = '<div class="mha-state">Não foi possível carregar a Rede de Irmãos agora.<br>Tente novamente em alguns minutos.</div>';
+      });
+  }
+
+  window.addEventListener('load', carregar);
+})();
+</script>
+</body>
+</html>
