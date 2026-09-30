@@ -28,9 +28,7 @@
   #mha-bg .mha-sym-ashlar { bottom: 8%; left: 4%; width: clamp(90px, 13vw, 150px); height: auto; opacity: 0.05; }
   #mha-bg .mha-sym-square { top: 55%; right: 6%; width: clamp(100px, 15vw, 180px); height: auto; opacity: 0.04; }
 
-  /* =========================================================
-     MENU SANDUÍCHE
-     ========================================================= */
+  /* MENU SANDUÍCHE */
   .mha-menu-btn {
     position: fixed; top: 14px; right: 14px; z-index: 1000;
     width: 46px; height: 46px; padding: 0;
@@ -47,10 +45,7 @@
   .mha-menu-btn:hover { border-color: rgba(232,210,154,.75); }
   .mha-menu-btn:active { transform: scale(.96); }
   .mha-menu-btn:focus-visible { outline: 2px solid #e8d29a; outline-offset: 3px; }
-  .mha-menu-btn span {
-    display: block; width: 22px; height: 2px; border-radius: 2px;
-    background: #e8d29a; transition: transform .25s ease, opacity .2s ease;
-  }
+  .mha-menu-btn span { display: block; width: 22px; height: 2px; border-radius: 2px; background: #e8d29a; transition: transform .25s ease, opacity .2s ease; }
   .mha-menu-btn.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .mha-menu-btn.is-open span:nth-child(2) { opacity: 0; }
   .mha-menu-btn.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -79,14 +74,12 @@
   .mha-menu-panel.is-open { transform: translateX(0); }
   .mha-menu-panel::-webkit-scrollbar { width: 6px; }
   .mha-menu-panel::-webkit-scrollbar-thumb { background: rgba(201,162,39,.3); border-radius: 8px; }
-
   .mha-menu-head { padding: 0 22px 18px; border-bottom: 1px solid rgba(201,162,39,.18); }
   .mha-menu-head h2 { margin: 0; font-family: Georgia, serif; font-weight: 400;
     font-size: 1.15rem; color: #f7f2e4; letter-spacing: .01em;
     text-shadow: 0 0 24px rgba(201,162,39,.3); }
   .mha-menu-head p { margin: 4px 0 0; font-size: .62rem; letter-spacing: .22em;
     text-transform: uppercase; color: #b9a980; }
-
   .mha-menu-nav { display: flex; flex-direction: column; padding: 14px 0; margin: 0; }
   .mha-menu-nav a {
     display: flex; align-items: center; gap: 12px;
@@ -119,9 +112,7 @@
     .mha-menu-panel { width: 92%; }
   }
 
-  /* =========================================================
-     GUARDIÃO — CHAT
-     ========================================================= */
+  /* GUARDIÃO */
   #mha-guardian {
     --mha-gold: #c9a227; --mha-gold-soft: #e8d29a; --mha-ink: #e9edf7; --mha-muted: #98a3ba;
     position: relative; z-index: 1;
@@ -279,9 +270,6 @@
   }
   .mha-lgpd a { color: var(--mha-gold-soft); text-decoration: underline; text-underline-offset: 2px; }
 
-  /* =========================================================
-     LOADER — ESQUADRO E COMPASSO SE DESENHANDO
-     ========================================================= */
   .mha-loader {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     padding: clamp(28px, 6vw, 56px) 12px;
@@ -362,9 +350,6 @@
     max-width: 320px; line-height: 1.6;
   }
 
-  /* =========================================================
-     ERRO COM BOTÃO RETRY
-     ========================================================= */
   .mha-retry-wrap {
     display: flex; flex-direction: column; align-items: center; gap: 12px;
     padding: clamp(14px, 3vw, 22px) 0 clamp(4px, 1vw, 10px);
@@ -475,6 +460,7 @@
     <a href="/ritos-e-tradicoes.html">Ritos e Tradições</a>
     <a href="/mitos-e-verdades.html">Mitos e Verdades</a>
     <a href="/onde-a-maconaria-acontece.html">Onde Acontece</a>
+    <a href="/parceiros.html">Rede de Irmãos</a>
     <a href="/politica-de-privacidade.html">Política de Privacidade</a>
     <a href="/termos-de-uso.html">Termos de Uso</a>
   </nav>
@@ -492,16 +478,12 @@
       <div class="mha-light" aria-hidden="true"></div>
     </header>
 
-    <!-- LOADER inicial (mostrado enquanto o cérebro carrega) -->
     <div id="mha-loader" class="mha-loader" role="status" aria-live="polite">
       <svg viewBox="0 0 100 100" aria-hidden="true">
-        <!-- Esquadro -->
         <path class="mha-loader-square"
               d="M 20 78 L 80 78 M 20 78 L 20 18" />
-        <!-- Compasso -->
         <path class="mha-loader-compass"
               d="M 50 12 L 20 72 M 50 12 L 80 72 M 50 12 L 50 22" />
-        <!-- Ponto central -->
         <circle class="mha-loader-dot" cx="50" cy="50" r="3.5"/>
       </svg>
       <p class="mha-loader-text">Preparando o Templo...</p>
@@ -519,9 +501,7 @@
 (function () {
   'use strict';
 
-  /* =========================================================
-     MENU SANDUÍCHE
-     ========================================================= */
+  /* MENU SANDUÍCHE */
   (function initMenu() {
     var btn = document.getElementById('mha-menu-btn');
     var panel = document.getElementById('mha-menu-panel');
@@ -547,20 +527,15 @@
     function toggle() {
       if (panel.classList.contains('is-open')) close(); else open();
     }
-
     btn.addEventListener('click', toggle);
     overlay.addEventListener('click', close);
-    panel.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', close);
-    });
+    panel.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', close); });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && panel.classList.contains('is-open')) close();
     });
   })();
 
-  /* =========================================================
-     COMUNICAÇÃO — via rotas serverless da Vercel (/api/brain, /api/chat)
-     ========================================================= */
+  /* COMUNICAÇÃO */
   var REQUEST_TIMEOUT_MS = 45000;
 
   function withTimeout(promise, ms) {
@@ -594,9 +569,7 @@
     return withTimeout(p, REQUEST_TIMEOUT_MS);
   }
 
-  /* =========================================================
-     ESTADO + REFS
-     ========================================================= */
+  /* ESTADO + REFS */
   var brain = { ETAPAS: [] };
   var state = { sessionId: createId(), step: 'SELECAO_ROTA', path: null, waiting: false, finished: false };
   var logEl = document.getElementById('mha-log');
@@ -604,9 +577,7 @@
   var thinkingEl = document.getElementById('mha-thinking');
   var loaderEl = document.getElementById('mha-loader');
 
-  /* =========================================================
-     UTILS
-     ========================================================= */
+  /* UTILS */
   function createId() {
     var r = Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
     return 'MH-' + Date.now().toString(36).toUpperCase() + '-' + r.slice(0, 10).toUpperCase();
@@ -678,9 +649,7 @@
     loaderEl.style.display = '';
   }
 
-  /* =========================================================
-     RENDER
-     ========================================================= */
+  /* RENDER */
   function guardianSay(text, opts) {
     opts = opts || {};
     var disp = clean(text);
@@ -715,11 +684,6 @@
     btn.addEventListener('click', restart);
     row.appendChild(btn); controlsEl.appendChild(row);
   }
-
-  /**
-   * Mostra o aviso de erro com botão "TENTAR NOVAMENTE".
-   * Retry é diferente de reiniciar: tenta carregar o cérebro de novo.
-   */
   function showLoadError() {
     clearControls();
     guardianSay('O Guardião está demorando mais que o esperado para atender. Pode ser instabilidade momentânea ou conexão lenta.\n\nToque no botão abaixo para tentar novamente.');
@@ -739,9 +703,7 @@
     controlsEl.appendChild(wrap);
   }
 
-  /* =========================================================
-     ENVIO
-     ========================================================= */
+  /* ENVIO */
   function send(value, silencioso) {
     var v = String(value == null ? '' : value).trim();
     if (!v || state.waiting || state.finished) return;
@@ -766,9 +728,7 @@
     restartBtn();
   }
 
-  /* =========================================================
-     CONTROLES
-     ========================================================= */
+  /* CONTROLES */
   function renderChoices(choices) {
     clearControls();
     if (!Array.isArray(choices) || !choices.length) return;
@@ -926,21 +886,13 @@
     if (ch.length) renderChoices(ch); else renderInput();
   }
 
-  /* =========================================================
-     CICLO DE VIDA
-     ========================================================= */
+  /* CICLO DE VIDA */
   function restart() {
     state = { sessionId: createId(), step: 'SELECAO_ROTA', path: null, waiting: false, finished: false };
     setThinking(false); logEl.innerHTML = ''; clearControls();
     setTimeout(loadBrain, 100);
   }
 
-  /**
-   * Carrega o cérebro com retry automático.
-   * - Tenta até 3 vezes
-   * - Backoff curto entre tentativas (600ms, 1200ms)
-   * - Se todas falharem, mostra o erro com botão "Tentar novamente"
-   */
   function loadBrain() {
     showLoader();
     clearControls();
