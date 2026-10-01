@@ -22,90 +22,6 @@
   #mha-bg .sym-ashlar { bottom: 8%; left: 4%; width: clamp(90px, 13vw, 150px); height: auto; opacity: 0.04; }
   #mha-bg .sym-g { bottom: 6%; right: 4%; width: clamp(80px, 12vw, 140px); height: auto; opacity: 0.06; }
 
-  /* MENU SANDUÍCHE */
-  .mha-menu-btn {
-    position: fixed; top: 14px; right: 14px; z-index: 1000;
-    width: 46px; height: 46px; padding: 0;
-    border-radius: 12px;
-    border: 1px solid rgba(201,162,39,.45);
-    background: linear-gradient(180deg, rgba(11,17,32,.92), rgba(5,7,14,.92));
-    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-    box-shadow: 0 8px 24px rgba(0,0,0,.5);
-    cursor: pointer; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 5px;
-    -webkit-tap-highlight-color: transparent;
-    transition: border-color .2s, transform .15s;
-  }
-  .mha-menu-btn:hover { border-color: rgba(232,210,154,.75); }
-  .mha-menu-btn:active { transform: scale(.96); }
-  .mha-menu-btn:focus-visible { outline: 2px solid #e8d29a; outline-offset: 3px; }
-  .mha-menu-btn span { display: block; width: 22px; height: 2px; border-radius: 2px; background: #e8d29a; transition: transform .25s ease, opacity .2s ease; }
-  .mha-menu-btn.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .mha-menu-btn.is-open span:nth-child(2) { opacity: 0; }
-  .mha-menu-btn.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-  .mha-menu-overlay {
-    position: fixed; inset: 0; z-index: 998;
-    background: rgba(5,7,14,.72);
-    backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
-    opacity: 0; visibility: hidden;
-    transition: opacity .25s ease, visibility .25s ease;
-  }
-  .mha-menu-overlay.is-open { opacity: 1; visibility: visible; }
-
-  .mha-menu-panel {
-    position: fixed; top: 0; right: 0; bottom: 0; z-index: 999;
-    width: min(88%, 340px); max-width: 100%;
-    background: linear-gradient(180deg, #0f1628 0%, #080c17 100%);
-    border-left: 1px solid rgba(201,162,39,.28);
-    box-shadow: -20px 0 60px rgba(0,0,0,.7);
-    transform: translateX(100%);
-    transition: transform .3s cubic-bezier(.4,.0,.2,1);
-    overflow-y: auto; -webkit-overflow-scrolling: touch;
-    display: flex; flex-direction: column;
-    padding: 22px 0 24px;
-  }
-  .mha-menu-panel.is-open { transform: translateX(0); }
-  .mha-menu-panel::-webkit-scrollbar { width: 6px; }
-  .mha-menu-panel::-webkit-scrollbar-thumb { background: rgba(201,162,39,.3); border-radius: 8px; }
-  .mha-menu-head { padding: 0 22px 18px; border-bottom: 1px solid rgba(201,162,39,.18); }
-  .mha-menu-head h2 { margin: 0; font-family: Georgia, serif; font-weight: 400;
-    font-size: 1.15rem; color: #f7f2e4; letter-spacing: .01em;
-    text-shadow: 0 0 24px rgba(201,162,39,.3); }
-  .mha-menu-head p { margin: 4px 0 0; font-size: .62rem; letter-spacing: .22em;
-    text-transform: uppercase; color: #b9a980; }
-  .mha-menu-nav { display: flex; flex-direction: column; padding: 14px 0; margin: 0; }
-  .mha-menu-nav a {
-    display: flex; align-items: center; gap: 12px;
-    padding: 13px 22px; color: #dde3f0; text-decoration: none;
-    font-size: .95rem; font-weight: 500;
-    border-left: 3px solid transparent;
-    transition: background .18s, border-color .18s, color .18s;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .mha-menu-nav a::before { content: "✦"; color: rgba(232,210,154,.55); font-size: .82rem; flex: 0 0 auto; }
-  .mha-menu-nav a:hover,
-  .mha-menu-nav a:focus-visible {
-    background: rgba(201,162,39,.08);
-    border-left-color: rgba(232,210,154,.7);
-    color: #fff; outline: none;
-  }
-  .mha-menu-nav a.is-active {
-    background: rgba(201,162,39,.13);
-    border-left-color: #e8d29a;
-    color: #f5ecd6; font-weight: 600;
-  }
-  .mha-menu-foot { margin-top: auto; padding: 18px 22px 0;
-    border-top: 1px solid rgba(201,162,39,.15);
-    font-size: .62rem; letter-spacing: .14em;
-    text-transform: uppercase; color: rgba(154,166,191,.62);
-    text-align: center; }
-
-  @media (max-width: 400px) {
-    .mha-menu-btn { top: 10px; right: 10px; width: 42px; height: 42px; }
-    .mha-menu-panel { width: 92%; }
-  }
-
   /* PÁGINA */
   #mha-page {
     position: relative; z-index: 1; width: 100%; max-width: 880px; margin: 0 auto;
@@ -310,9 +226,10 @@
     border-top: 1px solid rgba(201,162,39,.14); text-align: center;
     font-size: clamp(.58rem,1.8vw,.66rem); letter-spacing: .12em;
     text-transform: uppercase; color: rgba(154,166,191,.68); }
+  .mha-foot a { color: #b9a980; text-decoration: none; }
+  .mha-foot a:hover { color: #e8d29a; text-decoration: underline; text-underline-offset: 2px; }
 
   @media (prefers-reduced-motion: reduce) {
-    .mha-menu-panel, .mha-menu-overlay, .mha-menu-btn span,
     .mha-toast, .mha-copy-btn, .mha-cta { animation: none; transition: none; }
   }
   @media (max-width: 400px) {
@@ -323,6 +240,7 @@
     .mha-info-site .mha-site-text { max-width: 140px; }
   }
 </style>
+<link rel="stylesheet" href="/menu.css">
 </head>
 <body>
 
@@ -344,32 +262,7 @@
   </svg>
 </div>
 
-<button id="mha-menu-btn" class="mha-menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mha-menu-panel">
-  <span></span><span></span><span></span>
-</button>
-
-<div id="mha-menu-overlay" class="mha-menu-overlay" aria-hidden="true"></div>
-
-<aside id="mha-menu-panel" class="mha-menu-panel" role="navigation" aria-label="Menu principal">
-  <div class="mha-menu-head">
-    <h2>MasonHubAcademy</h2>
-    <p>Conhecimento antes da Porta</p>
-  </div>
-  <nav class="mha-menu-nav">
-    <a href="/">Início · Guardião</a>
-    <a href="/o-que-e-maconaria.html">O que é Maçonaria</a>
-    <a href="/historia-da-maconaria.html">História</a>
-    <a href="/ritos-e-tradicoes.html">Ritos e Tradições</a>
-    <a href="/mitos-e-verdades.html">Mitos e Verdades</a>
-    <a href="/onde-a-maconaria-acontece.html">Onde Acontece</a>
-    <a href="/parceiros.html" class="is-active">Rede de Irmãos</a>
-    <a href="/politica-de-privacidade.html">Política de Privacidade</a>
-    <a href="/termos-de-uso.html">Termos de Uso</a>
-  </nav>
-  <div class="mha-menu-foot">
-    MasonHubAcademy® · Atendimento preliminar
-  </div>
-</aside>
+<div id="mha-menu-root"></div>
 
 <article id="mha-page">
   <header class="mha-head">
@@ -395,7 +288,7 @@
   <a href="/" class="mha-back">← Voltar ao início</a>
 
   <footer class="mha-foot">
-    MasonHubAcademy® · Todos os direitos reservados
+    MasonHubAcademy® · <a href="/consultoria.html">Consultoria</a> · Todos os direitos reservados
   </footer>
 </article>
 
@@ -404,42 +297,6 @@
 <script>
 (function () {
   'use strict';
-
-  /* =========================================================
-     MENU SANDUÍCHE
-     ========================================================= */
-  (function initMenu() {
-    var btn = document.getElementById('mha-menu-btn');
-    var panel = document.getElementById('mha-menu-panel');
-    var overlay = document.getElementById('mha-menu-overlay');
-    if (!btn || !panel || !overlay) return;
-
-    function open() {
-      panel.classList.add('is-open');
-      overlay.classList.add('is-open');
-      btn.classList.add('is-open');
-      btn.setAttribute('aria-expanded', 'true');
-      btn.setAttribute('aria-label', 'Fechar menu');
-      document.documentElement.style.overflow = 'hidden';
-    }
-    function close() {
-      panel.classList.remove('is-open');
-      overlay.classList.remove('is-open');
-      btn.classList.remove('is-open');
-      btn.setAttribute('aria-expanded', 'false');
-      btn.setAttribute('aria-label', 'Abrir menu');
-      document.documentElement.style.overflow = '';
-    }
-    function toggle() {
-      if (panel.classList.contains('is-open')) close(); else open();
-    }
-    btn.addEventListener('click', toggle);
-    overlay.addEventListener('click', close);
-    panel.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', close); });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && panel.classList.contains('is-open')) close();
-    });
-  })();
 
   /* =========================================================
      TOAST
@@ -672,5 +529,6 @@
   window.addEventListener('load', carregar);
 })();
 </script>
+<script src="/menu.js" defer></script>
 </body>
 </html>
